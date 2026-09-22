@@ -1,0 +1,47 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css"><style>
+body{margin:0;padding:24px;background:#F8FAFC;font-family:var(--font-body);color:#3F3F46}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:11px;font-weight:500;color:#71717A;letter-spacing:.02em}
+.field input,.field select{font-family:var(--font-body);font-size:14px;padding:10px 14px;border-radius:10px;border:1.5px solid #E2E2E8;background:#fff;color:#3F3F46;outline:none;transition:border-color .15s}
+.field input:focus{border-color:#8B55FE;box-shadow:0 0 0 3px rgba(139,85,254,.15)}
+.field input::placeholder{color:#94A3B8}
+.field .help{font-size:11px;color:#71717A}
+.field .err{font-size:11px;color:#F3538E;display:flex;align-items:center;gap:4px}
+.field .err::before{content:'!';display:inline-flex;align-items:center;justify-content:center;width:12px;height:12px;background:#F3538E;color:#fff;border-radius:50%;font-size:9px;font-weight:700}
+.field.error input{border-color:#F3538E}
+.toggle{display:inline-flex;align-items:center;gap:10px;cursor:pointer}
+.toggle input{display:none}
+.toggle .sw{width:36px;height:20px;background:#E2E2E8;border-radius:9999px;position:relative;transition:background .2s}
+.toggle .sw::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;background:#fff;border-radius:50%;transition:transform .2s}
+.toggle input:checked + .sw{background:#8B55FE}
+.toggle input:checked + .sw::after{transform:translateX(16px)}
+</style></head><body>
+<div class="grid">
+  <div class="field">
+    <label>Correo de trabajo</label>
+    <input value="andrea@rotoplas.com">
+  </div>
+  <div class="field">
+    <label>Tamaño del equipo</label>
+    <select><option>151–500 colaboradores</option></select>
+  </div>
+  <div class="field">
+    <label>Nombre del curso</label>
+    <input placeholder="Ej. Liderazgo para mandos medios">
+    <span class="help">Será visible para todos los colaboradores</span>
+  </div>
+  <div class="field error">
+    <label>Fecha de inicio</label>
+    <input value="07/02/2024" style="color:#F3538E">
+    <span class="err">Esta fecha ya pasó</span>
+  </div>
+</div>
+<div style="margin-top:16px;display:flex;gap:18px;align-items:center">
+  <label class="toggle">
+    <input type="checkbox" checked>
+    <span class="sw"></span>
+    <span style="font-size:13px">Notificarme avances semanales</span>
+  </label>
+</div>
+</body></html>

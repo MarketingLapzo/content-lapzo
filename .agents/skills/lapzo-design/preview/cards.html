@@ -1,0 +1,38 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css"><style>
+body{margin:0;padding:24px;background:#F8FAFC;font-family:var(--font-body);color:#3F3F46}
+.row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{padding:18px;border-radius:14px}
+.soft{background:#fff;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.hard{background:#fff;box-shadow:4px 4px 0 #14142A;border:1.5px solid #14142A}
+.ia{background:linear-gradient(135deg,#A685FF 0%,#DDD4FF 100%);border:1px solid #C3B1FF;border-radius:20px;position:relative}
+.card h4{margin:0 0 6px;font-family:var(--font-body);font-weight:600;font-size:15px;color:#240C50}
+.card p{margin:0;font-size:12.5px;color:#3F3F46;line-height:1.5}
+.ia .badge{position:absolute;top:-10px;left:14px;background:#fff;border:1px solid #C3B1FF;border-radius:9999px;padding:3px 10px;font-size:10px;font-weight:600;color:#5029A3;display:flex;align-items:center;gap:4px}
+.ia .badge::before{content:'✦';color:#8B55FE}
+.label{font-size:10px;color:#71717A;font-family:ui-monospace,monospace;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;display:block}
+</style></head><body>
+<div class="row">
+  <div>
+    <span class="label">card soft</span>
+    <div class="card soft">
+      <h4>Mi equipo</h4>
+      <p>12 colaboradores con planes de carrera activos.</p>
+    </div>
+  </div>
+  <div>
+    <span class="label">card hard</span>
+    <div class="card hard">
+      <h4>+63,000 cursos</h4>
+      <p>Mazda alcanzó este número en un año.</p>
+    </div>
+  </div>
+  <div>
+    <span class="label">card ia</span>
+    <div class="card ia">
+      <span class="badge">lapzo.IA</span>
+      <h4 style="margin-top:6px">Sugerencia</h4>
+      <p>Tu equipo de Ventas tiene 3 brechas. ¿Genero un plan?</p>
+    </div>
+  </div>
+</div>
+</body></html>

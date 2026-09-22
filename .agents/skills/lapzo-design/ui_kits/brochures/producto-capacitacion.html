@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Capacitación — One Pager</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  :root { --page-w: 833px; --page-h: 1179px; --gutter: 50px; --display: 'Degular','Poppins',sans-serif; --module-color: #F9912A; --module-pastel: #FDE0C3; }
+  body { margin: 0; background: #E5E5EA; font-family: var(--font-body); color: #14142A; }
+  .pages { display: flex; flex-direction: column; align-items: center; gap: 28px; padding: 28px; }
+  .page { width: var(--page-w); height: var(--page-h); box-shadow: 0 10px 30px rgba(20,20,42,.10); position: relative; overflow: hidden; }
+
+  /* Hero (peach top half) */
+  .hero {
+    position: absolute; inset: 0 0 50% 0;
+    background: var(--module-pastel);
+    padding: 0 var(--gutter);
+  }
+  .hero .logo { position: absolute; top: 38px; right: var(--gutter); height: 36px; }
+  .hero .module-pill {
+    position: absolute;
+    top: 50px; left: var(--gutter);
+    display: inline-flex; align-items: center; gap: 14px;
+    background: #fff;
+    border: 2px solid var(--module-color);
+    border-radius: 9999px;
+    padding: 8px 28px 8px 8px;
+  }
+  .hero .module-pill .ic {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--module-pastel);
+    border: 2px solid var(--module-color);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero .module-pill .ic img { width: 22px; }
+  .hero .module-pill .lbl {
+    font-family: var(--display); font-weight: 800;
+    font-size: 24px; color: #14142A; letter-spacing: -0.01em;
+  }
+  .hero h1 {
+    position: absolute;
+    top: 150px; left: var(--gutter);
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 72px;
+    line-height: 1.0;
+    color: #14142A;
+    margin: 0;
+    letter-spacing: -0.025em;
+    max-width: 400px;
+  }
+  .hero .mockup {
+    position: absolute;
+    right: -40px; top: 200px;
+    width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 24px 50px rgba(20,20,42,.18);
+  }
+  .hero .scribble {
+    position: absolute;
+    left: 60px; bottom: -10px;
+    width: 280px;
+    opacity: .9;
+  }
+
+  /* Bottom — benefits + mini visuals */
+  .bottom {
+    position: absolute; inset: 50% 0 0 0;
+    background: #F7F7FC;
+    padding: 50px var(--gutter) 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 22px 32px;
+  }
+  .bottom .ben h3 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.25;
+    color: #14142A;
+    margin: 0 0 8px;
+  }
+  .bottom .ben p {
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: #14142A;
+    margin: 0 0 12px;
+  }
+  .bottom .ben .micro {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(20,20,42,.08);
+    padding: 10px 12px;
+    font-size: 10px;
+    color: #475569;
+  }
+  .bottom .ben .micro.cert { background: #fff; padding: 14px; text-align: center; }
+  .bottom .ben .micro.cert .h { font-size: 8.5px; font-weight: 700; color: #14142A; margin-bottom: 4px; }
+  .bottom .ben .micro.cert .b { background: #F7F7FC; height: 30px; border-radius: 4px; margin-bottom: 6px; }
+  .bottom .ben .micro.cert .cta { background: var(--module-color); color: #fff; font-weight: 700; padding: 6px 10px; border-radius: 6px; font-size: 9px; display: inline-block; }
+  .bottom .ben .micro.timer { display: flex; align-items: center; gap: 8px; padding: 12px; }
+  .bottom .ben .micro.timer .circ {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--module-pastel);
+    border: 2.5px solid var(--module-color);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    color: #14142A;
+    font-size: 12px;
+    line-height: 1;
+    flex-direction: column;
+  }
+  .bottom .ben .micro.timer .circ .min { font-size: 7.5px; font-weight: 500; }
+  .bottom .ben .micro.gamif {
+    display: flex; align-items: center; gap: 6px; padding: 10px;
+    background: #14142A; color: #fff;
+  }
+  .bottom .ben .micro.gamif .dot {
+    width: 18px; height: 18px;
+    background: conic-gradient(#01DA8C 0 25%, #F9912A 25 50%, #F3538E 50 75%, #2F80ED 75 100%);
+    border-radius: 50%;
+  }
+
+  @page { size: A4 portrait; margin: 0; }
+  @media print { body { background: #fff; } .pages { padding: 0; gap: 0; } .page { width: 210mm; height: 297mm; box-shadow: none; } }
+</style>
+</head>
+<body>
+
+<div class="pages">
+  <article class="page">
+
+    <!-- HERO -->
+    <div class="hero">
+      <img class="logo" src="../../assets/logo/lapzo-logo.png" alt="lapzo">
+      <div class="module-pill">
+        <span class="ic"><img src="../../assets/modules/icon-training-orange.svg"></span>
+        <span class="lbl">Capacitación</span>
+      </div>
+
+      <h1>Crea tu propia Universidad Corporativa</h1>
+
+      <!-- Product mockup placeholder -->
+      <div class="mockup" style="background: #fff; height: 320px; border: 1.5px solid #14142A; display: flex; align-items: center; justify-content: center; color: #94A3B8; font-size: 12px; font-style: italic;">
+        [ Screenshot del producto Lapzo LMS — vista de curso individual ]
+      </div>
+
+      <img class="scribble" src="../../assets/decor/squiggle-line-teal.svg" alt="">
+    </div>
+
+    <!-- BENEFITS GRID -->
+    <div class="bottom">
+      <div class="ben">
+        <h3>Crea cursos fácilmente y publica en minutos</h3>
+        <p>Con el LMS de lapzo crea cursos en minutos, aprovechando las mejores prácticas de la industria de e-learning y publicando capacitaciones para toda su organización.</p>
+        <div class="micro cert">
+          <div class="h">¡Excelente!</div>
+          <div class="b"></div>
+          <span class="cta">Mis cursos</span>
+        </div>
+      </div>
+
+      <div class="ben">
+        <h3>Ofrece rutas de aprendizaje 100% personalizadas</h3>
+        <p>Crea rutas de aprendizaje (learning paths) y automatiza tus procesos de onboarding para mantener a tus equipos motivados y a tu empresa con el mejor talento.</p>
+      </div>
+
+      <div class="ben">
+        <h3>Lleva las capacitaciones a cualquier lugar con nuestra app</h3>
+        <p>Apoya a todos tus colaboradores a tener un buen onboarding y capacitaciones, ¡incluso si están fuera de la oficina o sin acceso a internet!</p>
+      </div>
+
+      <div class="ben">
+        <div class="micro timer" style="margin-bottom: 14px;">
+          <div class="circ">30<span class="min">min</span></div>
+          <div>Microlearning · píldoras de 30 min</div>
+        </div>
+        <h3>Integra tus recursos de gamificación</h3>
+        <p>Incentiva a tus colaboradores a finalizar su aprendizaje con mensajes automatizados y motívalos a través de contenido didáctico y divertido integrando recursos interactivos como Genially y SCORM.</p>
+      </div>
+
+      <div class="ben">
+        <h3>Construye experiencias de aprendizaje únicas</h3>
+        <p>A través de videos y recursos interactivos (foro para colaboradores, quizes dentro de los videos), encuestas de satisfacción del contenido, feedback sobre materiales y Kardex en perfil de usuario.</p>
+      </div>
+
+      <div class="ben">
+        <h3>Cumple con las normativas y automatiza el seguimiento</h3>
+        <p>Reduce el trabajo operativo y alinea las capacitaciones que tu equipo realiza dentro de la plataforma con las normativas de la Secretaría de Trabajo de tu país.</p>
+        <div class="micro cert">
+          <div class="h" style="margin-bottom: 8px;">FORMATO DC-3</div>
+          <div class="b" style="background: #ECE8FF; margin-bottom: 8px;"></div>
+          <span class="cta">Generar reporte DC3</span>
+        </div>
+      </div>
+    </div>
+
+  </article>
+</div>
+
+</body>
+</html>

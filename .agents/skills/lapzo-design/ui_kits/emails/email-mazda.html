@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Email — Caso de éxito Mazda</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  body { margin: 0; background: #E5E5EA; font-family: var(--font-body); }
+  .email-wrap {
+    max-width: 670px;
+    margin: 30px auto;
+    background: #fff;
+    box-shadow: 0 8px 28px rgba(20,20,42,.10);
+    overflow: hidden;
+  }
+  .logo-bar { padding: 24px 0; text-align: center; background: #fff; }
+  .logo-bar img { height: 28px; }
+
+  /* HERO — Mazda variant: STAT-FOCUSED with dark pill */
+  .hero {
+    background: #8B55FE;
+    color: #fff;
+    padding: 38px 32px;
+    position: relative;
+    overflow: hidden;
+    min-height: 280px;
+  }
+  .hero h1 {
+    font-family: 'Degular', 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 38px;
+    line-height: 1.1;
+    color: #fff;
+    margin: 0 0 18px;
+    letter-spacing: -0.015em;
+    max-width: 440px;
+  }
+  .hero h1 .stat-pill {
+    background: #14142A;
+    color: #fff;
+    padding: 0 14px;
+    border-radius: 9999px;
+    white-space: nowrap;
+    display: inline-block;
+    line-height: 1.2;
+    font-size: 38px;
+  }
+  .hero .sub {
+    font-size: 15px;
+    color: #14142A;
+    margin: 0 0 24px;
+    max-width: 320px;
+    line-height: 1.4;
+  }
+  .hero .sub strong { font-weight: 700; }
+  .hero .cta-white {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    color: #5029A3;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 12px 24px;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 3px 3px 0 #14142A;
+  }
+  .hero .right-stage {
+    position: absolute;
+    right: -40px; top: 50%;
+    transform: translateY(-50%);
+    width: 280px; height: 280px;
+  }
+  .hero .right-stage .big-circle {
+    position: absolute;
+    width: 240px; height: 240px;
+    right: 0; top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: #5029A3;
+  }
+  .hero .right-stage .logo-circle {
+    position: absolute;
+    width: 92px; height: 92px;
+    border-radius: 50%;
+    background: #fff;
+    right: 110px; top: 80px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,.18);
+  }
+  .hero .right-stage .logo-circle img { max-width: 70px; max-height: 30px; }
+  .hero .right-stage .name-tag {
+    position: absolute;
+    background: #54F4F2;
+    color: #012D33;
+    padding: 8px 14px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    right: 70px;
+    top: 180px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  }
+  .hero .right-stage .name-tag .role { font-weight: 400; font-size: 10.5px; font-style: italic; }
+
+  /* BODY */
+  .body-section { padding: 36px 36px 30px; color: #14142A; font-size: 14px; line-height: 1.55; }
+  .body-section p { margin: 0 0 14px; }
+  .body-section ul { list-style: none; padding: 0; margin: 8px 0 24px; }
+  .body-section ul li { padding: 4px 0 4px 28px; position: relative; line-height: 1.55; }
+  .body-section ul li::before { content: '🥇'; position: absolute; left: 0; top: 4px; font-size: 14px; }
+  .body-section .cta-center { text-align: center; margin-top: 24px; }
+  .btn-violet { display: inline-block; background: #8B55FE; color: #fff; font-weight: 600; font-size: 14px; padding: 12px 26px; border-radius: 9999px; text-decoration: none; }
+
+  /* FOOTER */
+  .footer { background: #ECE8FF; text-align: center; padding: 30px 24px; color: #14142A; font-size: 12px; }
+  .footer .social { display: flex; gap: 14px; justify-content: center; margin: 14px 0 18px; }
+  .footer .social a { width: 38px; height: 38px; border-radius: 50%; background: #14142A; display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; font-weight: 700; font-size: 13px; }
+  .footer .addr { color: #14142A; font-size: 11.5px; line-height: 1.5; margin: 0 0 12px; }
+  .footer .legal a { color: #14142A; font-size: 11.5px; text-decoration: underline; margin: 0 6px; }
+</style>
+</head>
+<body>
+
+<div class="email-wrap">
+
+  <div class="logo-bar">
+    <img src="../../assets/logo/lapzo-logo.png" alt="lapzo">
+  </div>
+
+  <!-- HERO — stat banner -->
+  <div class="hero">
+    <h1>Haz que el <span class="stat-pill">95%</span> de tus capacitaciones se finalicen.</h1>
+    <p class="sub">Descubre cómo <strong>Mazda</strong> lo hizo posible.</p>
+    <a class="cta-white" href="#">Conoce el Caso de éxito</a>
+    <div class="right-stage">
+      <div class="big-circle"></div>
+      <div class="logo-circle"><img src="../../assets/client-logos/mazda.svg" alt="Mazda"></div>
+      <div class="name-tag">
+        Jhonatan Arana
+        <div class="role">Training manager en Mazda</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body-section">
+    <p>{{nombre}}, hoy queremos contarte cómo Mazda México junto a lapzo ha convertido la capacitación y el desarrollo de más de <strong>4,000 colaboradores</strong> en un diferenciador de su negocio.</p>
+    <p><strong>Algunos de los logros de la Universidad Mazda:</strong></p>
+    <ul>
+      <li>Un NPS superior a 96 puntos</li>
+      <li>95% de finalización en cursos</li>
+      <li>+63 mil cursos terminados durante 2022</li>
+    </ul>
+    <div class="cta-center">
+      <a class="btn-violet" href="#">Ver Caso de éxito</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p style="margin: 0;">¡Síguenos en redes sociales!</p>
+    <div class="social">
+      <a href="#" aria-label="Facebook">f</a>
+      <a href="#" aria-label="LinkedIn">in</a>
+      <a href="#" aria-label="Instagram">ig</a>
+    </div>
+    <p class="addr">Lapzo, Torre Vertice, Av. Cto. Frida Kahlo 195,<br>Haciendas de La Sierra, Monterrey, Nuevo León<br>66269</p>
+    <div class="legal">
+      <a href="#">Darme de baja</a>
+      <a href="#">Gestionar preferencias</a>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

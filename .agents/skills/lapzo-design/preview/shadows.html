@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css"><style>
+body{margin:0;padding:30px;background:#F8FAFC;font-family:var(--font-body);color:#3F3F46}
+.row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.cell{display:flex;flex-direction:column;align-items:center;gap:10px}
+.box{width:80px;height:80px;background:#fff;border-radius:14px}
+.box.hard{box-shadow:4px 4px 0 #14142A;border:1.5px solid #14142A}
+.box.soft{box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.box.glow{box-shadow:0 0 24px rgba(139,85,254,.30);border:1px solid #ECE8FF}
+.name{font-family:var(--font-display);font-weight:700;color:#240C50;font-size:13px}
+.val{font-size:10.5px;color:#71717A;font-family:ui-monospace,monospace;text-align:center;line-height:1.4}
+</style></head><body>
+<div class="row">
+  <div class="cell">
+    <div class="box hard"></div>
+    <div class="name">shadow-hard</div>
+    <div class="val">4px 4px 0 #14142A</div>
+  </div>
+  <div class="cell">
+    <div class="box soft"></div>
+    <div class="name">shadow-soft</div>
+    <div class="val">0 4px 20px rgba(0,0,0,.08)</div>
+  </div>
+  <div class="cell">
+    <div class="box glow"></div>
+    <div class="name">shadow-glow</div>
+    <div class="val">0 0 24px violet/20</div>
+  </div>
+</div>
+</body></html>

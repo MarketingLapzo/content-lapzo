@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css"><style>
+body{margin:0;padding:0;font-family:var(--font-body)}
+.row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.cell{padding:30px;display:flex;align-items:center;justify-content:center;position:relative;min-height:180px}
+.cell.light{background:#fff;border-right:1px solid #EFF0F6}
+.cell.violet{background:#8B55FE}
+.cell.dark{background:#14142A}
+.cell img{max-width:180px;max-height:90px}
+.cell .meta{position:absolute;bottom:10px;left:14px;font-size:10px;color:#71717A;font-family:ui-monospace,monospace}
+.cell.violet .meta,.cell.dark .meta{color:rgba(255,255,255,.7)}
+</style></head><body>
+<div class="row">
+  <div class="cell light">
+    <img src="../assets/logo/lapzo-logo.png" alt="lapzo">
+    <span class="meta">fondo claro</span>
+  </div>
+  <div class="cell violet">
+    <img src="../assets/logo/lapzo-logo-on-violet.png" alt="lapzo">
+    <span class="meta">fondo violeta</span>
+  </div>
+  <div class="cell dark">
+    <img src="../assets/logo/lapzo-logo-on-dark.png" alt="lapzo">
+    <span class="meta">fondo oscuro</span>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lapzo · Plantillas de anuncios (Meta / LinkedIn)</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css">
+<style>
+  body { margin: 0; padding: 48px 32px; background: var(--lapzo-bg-page); }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  .group { margin-bottom: 48px; }
+  .group h3 { margin: 0 0 4px; }
+  .frames { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; margin-top: 18px; }
+
+  /* ---- Ad frame base ---- */
+  .ad { position: relative; overflow: hidden; border-radius: var(--radius-md);
+        box-shadow: var(--shadow-pop); display: flex; flex-direction: column;
+        justify-content: space-between; color: #fff; padding: 28px; }
+  .ad--1x1 { width: 360px; height: 360px; }
+  .ad--4x5 { width: 320px; height: 400px; }
+  .ad--9x16 { width: 270px; height: 480px; }
+
+  .ad--dark { background: var(--lapzo-bg-dark); }
+  .ad--brand { background: var(--gradient-brand); }
+  .ad--soft { background: var(--lapzo-violet-soft); color: var(--accent-deep); }
+
+  .ad__eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
+  .ad__head { font-family: var(--font-display); font-weight: 700; line-height: 1.02; letter-spacing: -.02em; }
+  .ad__big { font-family: var(--font-display); font-weight: 700; font-size: 64px; line-height: .95; letter-spacing: -.03em; }
+  .ad__foot { display: flex; align-items: center; justify-content: space-between; }
+  .ad__logo { height: 22px; }
+  .ad__cta { background: var(--lapzo-violet); color: #fff; font-weight: 600; font-size: 13px; padding: 9px 16px; border-radius: var(--radius-pill); display: inline-flex; gap: 6px; align-items: center; }
+  .ad__cta--white { background: #fff; color: var(--accent); }
+  .ad__sparkle { position: absolute; top: 22px; right: 24px; color: var(--lapzo-violet-light); font-size: 20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <span class="eyebrow">Lapzo Design System · Marketing</span>
+  <h1 class="h1" style="margin:4px 0 8px;">Plantillas de anuncios</h1>
+  <p class="body" style="max-width:640px;margin:0 0 8px;">Tres formatos estándar para Meta y LinkedIn (1:1 feed, 4:5 feed vertical, 9:16 stories/reels). Duplica un frame, cambia el texto y la imagen. Reglas: título minúscula, sin "!", dato concreto, logo abajo, CTA verbo-primero.</p>
+
+  <!-- ===== v · Caso de éxito (número gigante) ===== -->
+  <div class="group">
+    <h3 class="h3">Caso de éxito · número gigante</h3>
+    <p class="small">Patrón: [verbo] + [dato] + [cliente] + [resultado]. Fondo oscuro #14142A.</p>
+    <div class="frames">
+
+      <div class="ad ad--1x1 ad--dark">
+        <div class="ad__eyebrow" style="color:var(--lapzo-violet-light)">Caso de éxito · automotriz</div>
+        <div>
+          <div class="ad__big">+63 mil</div>
+          <div class="ad__head" style="font-size:22px;margin-top:8px;">cursos terminados<br>en un año con <span style="color:var(--lapzo-violet-light)">Mazda</span></div>
+        </div>
+        <div class="ad__foot">
+          <img class="ad__logo" src="../../assets/logo/lapzo-logo-white.png" alt="Lapzo">
+          <span class="ad__cta">Conoce el caso <i class="ti ti-arrow-right"></i></span>
+        </div>
+      </div>
+
+      <div class="ad ad--4x5 ad--dark">
+        <div class="ad__eyebrow" style="color:var(--lapzo-violet-light)">Caso de éxito</div>
+        <div>
+          <div class="ad__big" style="font-size:56px;">197</div>
+          <div class="ad__head" style="font-size:20px;margin-top:8px;">empresas ya desarrollan a su gente con <em>Lapzo</em></div>
+        </div>
+        <div class="ad__foot">
+          <img class="ad__logo" src="../../assets/logo/lapzo-logo-white.png" alt="Lapzo">
+          <span class="ad__cta">Agenda demo <i class="ti ti-arrow-right"></i></span>
+        </div>
+      </div>
+
+      <div class="ad ad--9x16 ad--dark">
+        <i class="ti ti-sparkles ad__sparkle"></i>
+        <div class="ad__eyebrow" style="color:var(--lapzo-violet-light)">Velocidad</div>
+        <div>
+          <div class="ad__big" style="font-size:48px;">15 min</div>
+          <div class="ad__head" style="font-size:19px;margin-top:8px;">para crear una ruta de aprendizaje completa</div>
+        </div>
+        <div class="ad__foot">
+          <img class="ad__logo" src="../../assets/logo/lapzo-logo-white.png" alt="Lapzo">
+          <span class="ad__cta">Conoce más <i class="ti ti-arrow-right"></i></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== v · Lapzo.IA copiloto (gradiente) ===== -->
+  <div class="group">
+    <h3 class="h3">Lapzo.IA · copiloto (gradiente de marca)</h3>
+    <p class="small">Fondo gradiente violeta. Destello ✦ permitido junto a Lapzo.IA.</p>
+    <div class="frames">
+
+      <div class="ad ad--1x1 ad--brand">
+        <div class="ad__eyebrow"><i class="ti ti-sparkles" style="vertical-align:-2px"></i> lapzo.IA</div>
+        <div class="ad__head" style="font-size:30px;">Crea un curso completo desde un PDF en 5 minutos</div>
+        <div class="ad__foot">
+          <img class="ad__logo" src="../../assets/logo/lapzo-logo-white.png" alt="Lapzo">
+          <span class="ad__cta ad__cta--white">Probar Lapzo.IA <i class="ti ti-arrow-right"></i></span>
+        </div>
+      </div>
+
+      <div class="ad ad--9x16 ad--brand">
+        <div class="ad__eyebrow"><i class="ti ti-sparkles" style="vertical-align:-2px"></i> lapzo.IA</div>
+        <div class="ad__head" style="font-size:26px;">Tu copiloto de IA para desarrollar talento</div>
+        <div class="ad__foot">
+          <img class="ad__logo" src="../../assets/logo/lapzo-logo-white.png" alt="Lapzo">
+          <span class="ad__cta ad__cta--white">Conoce más <i class="ti ti-arrow-right"></i></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== v · Mensaje claro (fondo claro + Lapzi) ===== -->
+  <div class="group">
+    <h3 class="h3">Mensaje de marca (fondo claro + Lapzi)</h3>
+    <p class="small">Fondo lila suave, texto oscuro, mascota Lapzi en esquina.</p>
+    <div class="frames">
+
+      <div class="ad ad--4x5 ad--soft">
+        <div class="ad__eyebrow" style="color:var(--accent)">Aliado estratégico</div>
+        <div class="ad__head" style="font-size:30px;color:var(--accent-deep)">Transformamos talento en <em>acción</em></div>
+        <div class="ad__foot">
+          <img class="ad__logo" src="../../assets/logo/lapzo-logo.png" alt="Lapzo" style="height:24px;">
+          <span class="ad__cta">Agenda demo <i class="ti ti-arrow-right"></i></span>
+        </div>
+        <img src="../../assets/lapzi/lapzi-40.png" alt="" style="position:absolute;bottom:-10px;right:-8px;width:120px;opacity:.95;">
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

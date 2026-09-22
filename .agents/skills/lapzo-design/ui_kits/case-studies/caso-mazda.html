@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Caso de éxito — Mazda México</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  /* A4 portrait — 595×842pt at 72dpi.
+     Scale up x1.4 so it reads comfortably on screen, but print uses native size. */
+  :root {
+    --page-w: 833px;   /* 595 * 1.4 */
+    --page-h: 1179px;  /* 842 * 1.4 */
+    --gutter: 50px;
+    --display: 'Degular', 'Poppins', sans-serif;
+    --display-weight: 700;
+  }
+
+  body {
+    margin: 0;
+    background: #E5E5EA;
+    font-family: var(--font-body);
+    color: #14142A;
+  }
+
+  .pages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    padding: 28px;
+  }
+
+  .page {
+    width: var(--page-w);
+    height: var(--page-h);
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(20,20,42,.10);
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+
+  /* Header (pages 2-6) */
+  .header {
+    position: absolute;
+    top: 38px;
+    left: var(--gutter);
+    right: var(--gutter);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    height: 28px;
+  }
+  .header .logo { height: 22px; }
+  .header .div {
+    width: 1px;
+    height: 16px;
+    background: #14142A;
+  }
+  .header .label {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 14px;
+    color: #AEA0FF;
+  }
+  .header .pageno {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 14px;
+    color: #AEA0FF;
+  }
+
+  /* Body content area */
+  .body {
+    position: absolute;
+    top: 110px;
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: 50px;
+  }
+
+  /* Generic typography */
+  .h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 56px;
+    line-height: 1.0;
+    color: #14142A;
+    letter-spacing: -0.025em;
+    margin: 0;
+  }
+  .h2 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 38px;
+    line-height: 1.05;
+    color: #14142A;
+    letter-spacing: -0.02em;
+    margin: 0 0 20px;
+  }
+  .lead {
+    font-size: 16px;
+    line-height: 1.55;
+    color: #14142A;
+  }
+  .lead strong { font-weight: 600; }
+  p { margin: 0 0 16px; font-size: 16px; line-height: 1.55; color: #14142A; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ─── PAGE 1 — Cover ─── */
+  .cover .logo { position: absolute; left: var(--gutter); top: 70px; height: 56px; }
+  .cover .title { position: absolute; left: var(--gutter); top: 540px; max-width: 600px; }
+  .cover .title .h1 { font-size: 80px; }
+  .cover .intro { position: absolute; left: var(--gutter); top: 780px; max-width: 720px; }
+  .cover .dotgrid-tr {
+    position: absolute;
+    top: 130px;
+    right: var(--gutter);
+    width: 230px;
+    height: 230px;
+    background-image: radial-gradient(circle, #C5A9FF 1.4px, transparent 1.4px);
+    background-size: 28px 28px;
+    background-position: 0 0;
+    opacity: .85;
+  }
+  .cover .dotgrid-br {
+    position: absolute;
+    bottom: 80px;
+    right: var(--gutter);
+    width: 230px;
+    height: 110px;
+    background-image: radial-gradient(circle, #C5A9FF 1.4px, transparent 1.4px);
+    background-size: 28px 28px;
+    background-position: 0 0;
+    opacity: .55;
+  }
+
+  /* ─── PAGE 2 — Sobre el cliente ─── */
+  .about .h1 { text-align: center; margin-bottom: 30px; }
+  .about .top { padding: 0 60px; }
+  .about .photo {
+    position: absolute;
+    right: var(--gutter);
+    bottom: 380px;
+    width: 380px;
+    height: 460px;
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+    background-color: #E5E5EA;
+  }
+  .about .second {
+    position: absolute;
+    left: var(--gutter);
+    right: 470px;
+    top: 540px;
+    bottom: 320px;
+    overflow: hidden;
+  }
+  .about .second .h2 { font-size: 32px; }
+  .about .acerca-box {
+    position: absolute;
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: 80px;
+    background: #F0EEEE;
+    border-radius: 14px;
+    padding: 28px 36px;
+  }
+  .about .acerca-box .h3 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 22px;
+    color: #14142A;
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+  .about .acerca-box p { font-size: 14px; margin: 0 0 14px; }
+  .about .acerca-box .cta {
+    color: #8B55FE;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  /* ─── PAGE 3 — El reto ─── */
+  .challenge .body { display: grid; grid-template-columns: 1fr 320px; gap: 50px; }
+  .challenge .photo {
+    position: relative;
+    height: 100%;
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+    background-color: #E5E5EA;
+    overflow: hidden;
+  }
+  .challenge .content .h1 { font-size: 64px; margin-bottom: 32px; }
+  .challenge .quote {
+    background: #F0EEEE;
+    border-radius: 14px;
+    padding: 24px 30px;
+    margin-top: 30px;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .challenge .quote .who {
+    margin-top: 14px;
+    font-style: normal;
+    font-weight: 600;
+  }
+  .challenge .quote .role { font-style: normal; font-weight: 400; color: #475569; }
+
+  /* ─── PAGE 4 — La solución ─── */
+  .solution .h1 { font-size: 64px; margin-bottom: 30px; }
+  .solution ol { list-style: none; padding: 0; margin: 30px 0 0; }
+  .solution ol li {
+    display: grid;
+    grid-template-columns: 38px 1fr;
+    gap: 18px;
+    align-items: start;
+    padding: 14px 0;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .solution ol li .num {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #8B55FE;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 1px;
+  }
+  .solution ol li strong { font-weight: 700; }
+  .solution .quote-box {
+    background: #F0EEEE;
+    border-radius: 14px;
+    padding: 30px 36px;
+    margin-top: 36px;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.55;
+  }
+  .solution .quote-box .attrib {
+    margin-top: 18px;
+    text-align: right;
+    font-style: normal;
+  }
+  .solution .quote-box .attrib .nm {
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .solution .quote-box .attrib .ro { color: #14142A; font-size: 14px; }
+
+  /* ─── PAGE 5 — Resultados ─── */
+  .results .h1 { font-size: 64px; margin-bottom: 8px; }
+  .results .sub { font-size: 16px; color: #475569; margin-bottom: 40px; }
+  .results .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-bottom: 30px;
+  }
+  .results .stat {
+    background: #fff;
+    border: 1.5px solid #14142A;
+    box-shadow: 5px 5px 0 #8B55FE;
+    border-radius: 18px;
+    padding: 32px 28px;
+  }
+  .results .stat .num {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 64px;
+    line-height: 1;
+    color: #14142A;
+    letter-spacing: -0.03em;
+    margin-bottom: 10px;
+  }
+  .results .stat .num .accent { color: #8B55FE; }
+  .results .stat .lbl {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #14142A;
+  }
+  .results .row-extra {
+    background: #14142A;
+    border-radius: 14px;
+    padding: 24px 30px;
+    color: #fff;
+    margin-top: 12px;
+  }
+  .results .row-extra .h3 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 22px;
+    margin: 0 0 10px;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+  .results .row-extra p { color: rgba(255,255,255,.85); margin: 0; font-size: 14.5px; }
+
+  /* ─── PAGE 6 — Productos usados ─── */
+  .products .h1 { font-size: 64px; margin-bottom: 40px; }
+  .products .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+  .products .mod-card {
+    background: #F0EEEE;
+    border-radius: 16px;
+    padding: 24px;
+    min-height: 200px;
+  }
+  .products .mod-card .head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .products .mod-card .ico {
+    width: 36px;
+    height: 36px;
+  }
+  .products .mod-card .nm {
+    font-family: var(--font-body);
+    font-weight: 700;
+    color: #5029A3;
+    font-size: 15px;
+  }
+  .products .mod-card p { font-size: 14px; line-height: 1.5; margin: 0; }
+  .products .footer {
+    position: absolute;
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: 60px;
+    text-align: center;
+    color: #94A3B8;
+    font-size: 12px;
+  }
+  .products .footer .cta {
+    display: inline-block;
+    background: #8B55FE;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    margin-bottom: 16px;
+  }
+
+  /* Print */
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  @media print {
+    body { background: #fff; }
+    .pages { padding: 0; gap: 0; }
+    .page {
+      width: 210mm;
+      height: 297mm;
+      box-shadow: none;
+      page-break-after: always;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="pages">
+
+  <!-- PAGE 1 — COVER -->
+  <article class="page cover">
+    <img class="logo" src="../../assets/logo/lapzo-logo.png" alt="lapzo">
+    <div class="dotgrid-tr"></div>
+    <div class="dotgrid-br"></div>
+    <div class="title">
+      <div class="h1">Caso de éxito<br>Mazda México</div>
+    </div>
+    <div class="intro">
+      <div class="lead">Mediante la capacitación de cerca de 4 mil personas y la automatización de la mayoría de los entrenamientos, <strong>Mazda México</strong> logró un impacto significativo en la organización, liberando al equipo de capacitación de tareas repetitivas y creando rutas de aprendizaje personalizadas para cada puesto.</div>
+    </div>
+  </article>
+
+  <!-- PAGE 2 — SOBRE EL CLIENTE -->
+  <article class="page about">
+    <div class="header">
+      <img class="logo" src="../../assets/logo/lapzo-logo.png" alt="lapzo">
+      <div class="div"></div>
+      <span class="label">Caso de exito</span>
+      <span class="pageno">01</span>
+    </div>
+
+    <h1 class="h1" style="position:absolute;top:140px;left:0;right:0;text-align:center;">Sobre Mazda México</h1>
+
+    <div class="top" style="position:absolute;top:240px;left:var(--gutter);right:var(--gutter);">
+      <p><strong>Mazda México</strong> es una empresa con 17 años de experiencia en el mercado nacional. Forma parte de una compañía global con más de un siglo de historia. Inició sus operaciones en México con solo 5 concesionarias y al cierre de 2022 ha logrado expandir su red a 69 distribuidores, lo que representa <strong>un crecimiento 13X.</strong></p>
+    </div>
+
+    <div class="second">
+      <h2 class="h2">Son las personas la clave de su crecimiento 13X</h2>
+      <p>Mazda México concluyó el 2022 en el <strong>séptimo lugar</strong> en las ventas de automóviles en el mercado mexicano, donde compite con cerca de 54 marcas. La clave de este éxito y de su crecimiento 13X está en transmitir los valores, objetivos y compromiso por la experiencia de cada cliente a los más de 10 mil colaboradores en planta, 100 colaboradores en corporativo y a todas las personas son parte de su red de distribuidores.</p>
+    </div>
+
+    <div class="photo" style="background-image: linear-gradient(135deg, #4A4458 0%, #2a2538 100%);">
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:12px;">[foto equipo Mazda — pendiente]</div>
+    </div>
+
+    <div class="acerca-box">
+      <div class="h3">Acerca de lapzo</div>
+      <p>Somos un socio estratégico que apoya a las organizaciones a cumplir sus resultados de negocio, lo hacemos a través de una plataforma que integra cuatro módulos clave: Capacitación y Aprendizaje, Desarrollo por Competencias, Desempeño y Engagement.</p>
+      <a class="cta" href="#">Conoce las soluciones lapzo →</a>
+    </div>
+  </article>
+
+  <!-- PAGE 3 — EL RETO -->
+  <article class="page challenge">
+    <div class="header">
+      <img class="logo" src="../../assets/logo/lapzo-logo.png" alt="lapzo">
+      <div class="div"></div>
+      <span class="label">Caso de exito</span>
+      <span class="pageno">02</span>
+    </div>
+    <div class="body">
+      <div class="content">
+        <h1 class="h1">El reto</h1>
+        <p>Una operación que comenzó en 2007 con 5 concesionarios y que en 2022 cuenta con <strong>69 distribuidores</strong> en todo México requiere una formación constante, alineada y medible. El equipo de capacitación enfrentaba 3 retos críticos:</p>
+        <p>Producir contenido a la velocidad del negocio sin sacrificar calidad, garantizar que cada colaborador — desde planta hasta corporativo — reciba el entrenamiento que su rol requiere, y demostrar el impacto de cada capacitación en los resultados de negocio.</p>
+        <div class="quote">
+          "Empezamos con 5 cursos y un par de personas creando contenido. Llegamos a tener 150 cursos propios y necesitábamos escalar sin contratar a 10 instruccionalistas más."
+          <div class="who">Jhonatan Arana</div>
+          <div class="role">Training Manager en Mazda México</div>
+        </div>
+      </div>
+      <div class="photo" style="background-image: linear-gradient(180deg, #B43A3A 0%, #6F1F1F 100%);">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:12px;text-align:center;padding:20px;">[foto contextual Mazda — pendiente]</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- PAGE 4 — LA SOLUCIÓN -->
+  <article class="page solution">
+    <div class="header">
+      <img class="logo" src="../../assets/logo/lapzo-logo.png" alt="lapzo">
+      <div class="div"></div>
+      <span class="label">Caso de exito</span>
+      <span class="pageno">03</span>
+    </div>
+    <div class="body">
+      <h1 class="h1">La solución propuesta</h1>
+      <p>Capacitar a cerca de 4 mil personas va más allá de crear cursos, se trata de identificar las necesidades de entrenamiento de cada colaborador, dar seguimiento a sus avances y crear un plan de acción para que el entrenamiento provoque un impacto en la organización. Con la ayuda de lapzo, Mazda logró automatizar el <strong>80% de las capacitaciones</strong> relacionadas con procesos, fundamentos y onboardings.</p>
+      <p>Además, se crearon rutas de aprendizaje personalizadas para cada puesto, lo que permitió automatizar la asignación de cursos para cada nuevo colaborador y crear una visibilidad de cumplimiento por puesto, distribuidor y zona geográfica.</p>
+      <ol>
+        <li><div class="num">1</div><div><strong>Mapear</strong> las necesidades de capacitación para cada puesto</div></li>
+        <li><div class="num">2</div><div><strong>Desarrollar</strong> cursos con distintas modalidades: webinar, online, presencial</div></li>
+        <li><div class="num">3</div><div><strong>Complementar</strong> con el catálogo de cursos lapzo</div></li>
+        <li><div class="num">4</div><div><strong>Diseñar</strong> las rutas de aprendizaje</div></li>
+        <li><div class="num">5</div><div><strong>Revisar</strong> de manera periódica los resultados y optimizar con base en los datos generados por el proyecto</div></li>
+      </ol>
+      <div class="quote-box">
+        "Arrancamos nuestro portal de entrenamiento con solo 5 cursos, crecimos muy rápido generando contenido de producto, ventas digitales, y administración. En 2021 lapzo nos liberó su catálogo de cursos y comenzamos a incorporar la parte soft skills. Cerramos 2022 con una oferta de 150 cursos propios y 160 cursos del catálogo lapzo."
+        <div class="attrib">
+          <div class="nm">Jhonatan Arana</div>
+          <div class="ro">Training Manager en Mazda México</div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- PAGE 5 — RESULTADOS -->
+  <article class="page results">
+    <div class="header">
+      <img class="logo" src="../../assets/logo/lapzo-logo.png" alt="lapzo">
+      <div class="div"></div>
+      <span class="label">Caso de exito</span>
+      <span class="pageno">04</span>
+    </div>
+    <div class="body">
+      <h1 class="h1">Resultados</h1>
+      <div class="sub">Doce meses después de la implementación con lapzo</div>
+      <div class="grid">
+        <div class="stat">
+          <div class="num"><span class="accent">+63,000</span></div>
+          <div class="lbl">cursos terminados en un año</div>
+        </div>
+        <div class="stat">
+          <div class="num"><span class="accent">+310</span></div>
+          <div class="lbl">cursos disponibles entre propios y catálogo lapzo</div>
+        </div>
+        <div class="stat">
+          <div class="num"><span class="accent">80%</span></div>
+          <div class="lbl">de las capacitaciones de procesos automatizadas</div>
+        </div>
+        <div class="stat">
+          <div class="num"><span class="accent">100%</span></div>
+          <div class="lbl">de visibilidad por puesto, distribuidor y zona geográfica</div>
+        </div>
+      </div>
+      <div class="row-extra">
+        <h3 class="h3">El equipo de capacitación libró 60% de su tiempo</h3>
+        <p>Lo que antes era trabajo operativo repetitivo, hoy se invierte en diseñar experiencias de aprendizaje de mayor impacto.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- PAGE 6 — PRODUCTOS USADOS -->
+  <article class="page products">
+    <div class="header">
+      <img class="logo" src="../../assets/logo/lapzo-logo.png" alt="lapzo">
+      <div class="div"></div>
+      <span class="label">Caso de exito</span>
+      <span class="pageno">05</span>
+    </div>
+    <div class="body">
+      <h1 class="h1">Productos usados</h1>
+      <div class="grid">
+        <div class="mod-card">
+          <div class="head">
+            <img class="ico" src="../../assets/modules/icon-mortarboard.svg">
+            <span class="nm">Capacitación y Aprendizaje</span>
+          </div>
+          <p>Simplifica los procesos de capacitación, a través de la administración y creación de experiencias de aprendizaje a la medida.</p>
+        </div>
+        <div class="mod-card">
+          <div class="head">
+            <img class="ico" src="../../assets/modules/icon-rocket-violet.svg">
+            <span class="nm">Desarrollo por competencias</span>
+          </div>
+          <p>Complementa tu desarrollo con nuestra oferta de cursos premium, enfocada en el desarrollo de competencias.</p>
+        </div>
+        <div class="mod-card">
+          <div class="head">
+            <img class="ico" src="../../assets/modules/icon-competencies.svg">
+            <span class="nm">Desempeño</span>
+          </div>
+          <p>Mide el rendimiento de tus colaboradores con evaluaciones 360°, KPIs y feedback continuo alineado al negocio.</p>
+        </div>
+        <div class="mod-card">
+          <div class="head">
+            <img class="ico" src="../../assets/modules/icon-eval-pink-dark.svg">
+            <span class="nm">Engagement</span>
+          </div>
+          <p>Encuestas de clima y pulso para mantener el compromiso de tus colaboradores con visibilidad para los líderes.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <a class="cta" href="#">Habla con un experto en talento</a>
+      <div>© 2026 Lapzo · Hecho con ✦ en CDMX</div>
+    </div>
+  </article>
+
+</div>
+
+</body>
+</html>

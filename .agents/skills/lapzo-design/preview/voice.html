@@ -1,0 +1,40 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css"><style>
+body{margin:0;padding:24px;background:#fff;font-family:var(--font-body);color:#3F3F46;font-size:13px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.col{padding:0 20px}
+.col:first-child{border-right:1px solid #EFF0F6}
+.col h4{margin:0 0 12px;font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.col h4.yes{color:#04949D}
+.col h4.no{color:#F3538E}
+.col ul{margin:0;padding:0;list-style:none}
+.col li{padding:6px 0;line-height:1.45;display:flex;gap:8px;align-items:flex-start}
+.col li::before{flex-shrink:0;font-weight:700;margin-top:2px;font-size:11px}
+.yes li::before{content:'✓';color:#04949D}
+.no li::before{content:'✗';color:#F3538E;text-decoration:line-through}
+.col li em{color:#240C50;font-style:normal;font-weight:500}
+</style></head><body>
+<div class="grid">
+  <div class="col yes">
+    <h4 class="yes">sí dice</h4>
+    <ul>
+      <li><em>Aliado estratégico</em></li>
+      <li><em>Desarrollo de talento</em></li>
+      <li><em>Colaboradores</em></li>
+      <li><em>Impacto en el negocio</em></li>
+      <li>Transformamos talento <em>en acción</em></li>
+      <li>En pocos clicks · sin fricción</li>
+    </ul>
+  </div>
+  <div class="col no">
+    <h4 class="no">no dice</h4>
+    <ul>
+      <li><em>Plataforma</em> / software / SaaS</li>
+      <li><em>Gestión</em> del talento / RRHH</li>
+      <li><em>Empleados</em> / headcount</li>
+      <li><em>Robusto · escalable</em> · world-class</li>
+      <li>Soluciones de <em>primer nivel</em></li>
+      <li>Optimización de <em>recursos</em></li>
+    </ul>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Lapzo — Producto</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  body { margin:0; background:#F8FAFC; }
+  .app { display:grid; grid-template-columns: 240px 1fr; min-height:100vh; }
+
+  /* Sidebar */
+  .sidebar { background:#14142A; color:#fff; padding:20px 14px; display:flex; flex-direction:column; gap:8px; position:sticky; top:0; height:100vh; }
+  .sidebar .brand { display:flex; align-items:center; gap:10px; padding: 4px 10px 16px; }
+  .sidebar .brand img { width:36px; height:36px; }
+  .sidebar .brand-name { font-family: var(--font-display); font-weight:700; font-size:22px; color:#fff; letter-spacing:-0.02em; }
+  .sidebar .nav-section { font-size:11px; color:#94A3B8; letter-spacing:.08em; text-transform:uppercase; margin:14px 12px 6px; }
+  .nav-item { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; cursor:pointer; color:#C3B1FF; font-size:13.5px; font-weight:500; transition: background .15s, color .15s; }
+  .nav-item:hover { background:rgba(255,255,255,.06); color:#fff; }
+  .nav-item.active { background:#8B55FE; color:#fff; }
+  .nav-item .ico { width:18px; height:18px; filter: invert(85%) sepia(40%) saturate(900%) hue-rotate(220deg); flex-shrink:0; }
+  .nav-item.active .ico { filter: brightness(0) invert(1); }
+  .sidebar .footer { margin-top:auto; padding:10px; display:flex; align-items:center; gap:10px; border-top:1px solid rgba(255,255,255,.08); padding-top:14px; }
+  .sidebar .avatar { width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,#8B55FE,#21DDE0); display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff; font-size:13px; }
+  .sidebar .who .nm { font-size:13px; font-weight:600; color:#fff; }
+  .sidebar .who .org { font-size:11px; color:#94A3B8; }
+
+  /* Top bar */
+  .topbar { background:#fff; border-bottom:1px solid #EFF0F6; padding:14px 28px; display:flex; align-items:center; gap:16px; position:sticky; top:0; z-index:10; }
+  .topbar .crumb { display:flex; align-items:center; gap:8px; flex:1; }
+  .topbar .crumb h1 { font-family: var(--font-display); font-weight:700; font-size:22px; color:#240C50; margin:0; letter-spacing:-0.01em; }
+  .topbar .search { flex:1; max-width:380px; position:relative; }
+  .topbar .search input { width:100%; padding:9px 14px 9px 36px; border-radius:9999px; border:1px solid #E2E2E8; font-family:var(--font-body); font-size:13px; background:#F7F7FC; outline:none; }
+  .topbar .search input:focus { border-color:#8B55FE; background:#fff; }
+  .topbar .search .si { position:absolute; left:11px; top:9px; width:16px; opacity:.55; }
+  .topbar .ia-btn { background: linear-gradient(135deg,#8B55FE,#A685FF); color:#fff; border:none; border-radius:9999px; padding:9px 14px; font-weight:600; font-size:12.5px; cursor:pointer; display:flex; align-items:center; gap:6px; font-family:var(--font-body); }
+  .topbar .ia-btn::before { content:'✦'; }
+  .topbar .icon-btn { width:36px; height:36px; border-radius:50%; border:1px solid #E2E2E8; background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; position:relative; }
+  .topbar .icon-btn img { width:18px; }
+  .topbar .icon-btn .dot { position:absolute; top:6px; right:8px; width:8px; height:8px; background:#F3538E; border-radius:50%; border:2px solid #fff; }
+  .topbar .me { width:36px; height:36px; border-radius:50%; background:#F5F2FF; color:#5029A3; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; cursor:pointer; }
+
+  /* Main content */
+  .main { padding:28px; max-width: 1200px; }
+
+  /* Cards */
+  .card { background:#fff; border-radius:14px; box-shadow:0 4px 20px rgba(20,20,42,.06); padding:20px; }
+  .card-hard { background:#fff; border-radius:14px; border:1.5px solid #14142A; box-shadow:4px 4px 0 #14142A; padding:18px; }
+  .card-ia { background: linear-gradient(135deg, rgba(166,133,255,.18), rgba(221,212,255,.45)); border:1px solid rgba(195,177,255,.6); border-radius:20px; padding:18px; position:relative; }
+
+  /* Page-specific */
+  .page-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+  .page-head h2 { font-family:var(--font-display); font-weight:700; font-size:30px; color:#240C50; margin:0 0 4px; letter-spacing:-0.02em; }
+  .page-head .sub { color:#71717A; font-size:14px; margin:0; }
+  .page-head .actions { display:flex; gap:10px; }
+
+  /* Stats row */
+  .stats { display:grid; grid-template-columns: repeat(4,1fr); gap:14px; margin-bottom:18px; }
+  .stat { background:#fff; border-radius:14px; padding:16px; border:1px solid #EFF0F6; position:relative; overflow:hidden; }
+  .stat .lbl { font-size:12px; color:#71717A; }
+  .stat .num { font-family:var(--font-display); font-weight:700; font-size:28px; color:#240C50; margin:6px 0 2px; line-height:1; letter-spacing:-0.02em; }
+  .stat .delta { font-size:12px; color:#01DA8C; font-weight:600; }
+  .stat .delta.dn { color:#F3538E; }
+  .stat .squiggle { position:absolute; right:-10px; bottom:-6px; opacity:.4; height:18px; }
+
+  /* Mi equipo table */
+  .filters { display:flex; gap:10px; align-items:center; margin-bottom:14px; flex-wrap:wrap; }
+  .filters .field { background:#fff; border:1px solid #E2E2E8; padding:8px 14px; border-radius:9999px; font-size:13px; color:#3F3F46; display:flex; align-items:center; gap:6px; cursor:pointer; }
+  .filters .field img { width:14px; opacity:.6; }
+  .filters .progress-filter { background:#fff; border:1px solid #E2E2E8; border-radius:9999px; padding:6px 14px 6px 14px; display:flex; align-items:center; gap:10px; font-size:13px; }
+  .filters .progress-filter .rng { width:120px; height:6px; background:#ECE8FF; border-radius:9999px; position:relative; }
+  .filters .progress-filter .rng::after { content:''; position:absolute; left:0; top:0; bottom:0; width:80%; background:linear-gradient(90deg,#8B55FE,#A685FF); border-radius:9999px; }
+  .filters .progress-filter .rng .knob { position:absolute; right:-6px; top:-4px; width:14px; height:14px; background:#fff; border:2px solid #8B55FE; border-radius:50%; cursor:grab; }
+
+  .team-table { background:#fff; border-radius:14px; overflow:hidden; border:1px solid #EFF0F6; box-shadow:0 4px 20px rgba(20,20,42,.04); }
+  table { width:100%; border-collapse: collapse; font-size:13px; }
+  thead th { text-align:left; padding:14px 16px; color:#71717A; font-weight:500; font-size:12px; border-bottom:1px solid #EFF0F6; background:#FBFAFE; }
+  tbody td { padding:14px 16px; border-bottom:1px solid #F5F4FA; color:#3F3F46; vertical-align:middle; }
+  tbody tr:last-child td { border-bottom:0; }
+  tbody tr:hover { background:#FBFAFE; }
+  .person { display:flex; align-items:center; gap:10px; }
+  .ava { width:30px; height:30px; border-radius:50%; background:#ECE8FF; color:#5029A3; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:12px; }
+  .ava.b { background:#FFD3E3; color:#5A1838; }
+  .ava.c { background:#FDE0C3; color:#7A3A0A; }
+  .ava.d { background:#D6E6FB; color:#0a2e6b; }
+  .ava.e { background:#CCFFEC; color:#012D33; }
+  .progress-cell { display:flex; align-items:center; gap:10px; min-width:130px; }
+  .progress-cell .bar { flex:1; height:6px; background:#EFF0F6; border-radius:9999px; overflow:hidden; }
+  .progress-cell .fill { height:100%; background:#01DA8C; border-radius:9999px; }
+  .progress-cell .fill.warn { background:#F2C94C; }
+  .progress-cell .fill.violet { background:#8B55FE; }
+  .progress-cell .pct { font-size:12px; color:#71717A; min-width:32px; }
+  .status-pill { display:inline-flex; align-items:center; gap:6px; padding:4px 12px; border-radius:9999px; font-size:12px; font-weight:600; }
+  .status-pill .dot { width:6px; height:6px; border-radius:50%; }
+  .status-pill.ok { background:#CCFFEC; color:#012D33; }
+  .status-pill.ok .dot { background:#01DA8C; }
+  .status-pill.wip { background:#FFF3CC; color:#3F3F46; }
+  .status-pill.wip .dot { background:#F2C94C; }
+  .status-pill.late { background:#FFD3E3; color:#5A1838; }
+  .status-pill.late .dot { background:#F3538E; }
+  .status-pill.fail { background:#FBE5EC; color:#5A1838; }
+  .status-pill.fail .dot { background:#F3538E; }
+  .date-cell { color:#3F3F46; font-size:13px; }
+  .date-cell.alert { color:#F3538E; font-weight:600; display:flex; align-items:center; gap:4px; }
+  .date-cell.alert::after { content:'⊘'; color:#F3538E; }
+  .row-menu { position:relative; cursor:pointer; }
+  .row-menu .kebab { color:#94A3B8; padding:4px 8px; }
+  .menu-pop { position:absolute; top:30px; right:0; background:#14142A; color:#fff; border-radius:10px; box-shadow:0 8px 28px rgba(20,20,42,.25); padding:6px; min-width:170px; z-index:10; }
+  .menu-pop .mi { padding:8px 10px; border-radius:6px; font-size:13px; display:flex; align-items:center; justify-content:space-between; gap:8px; cursor:pointer; }
+  .menu-pop .mi:hover { background:rgba(255,255,255,.08); }
+  .menu-pop .mi.danger { color:#F3538E; }
+  .menu-pop .mi .ico { opacity:.6; font-size:13px; }
+
+  .table-foot { padding:10px 16px; display:flex; justify-content:flex-end; color:#71717A; font-size:12px; background:#FBFAFE; }
+
+  /* Capacitación cards */
+  .grid-courses { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap:16px; }
+  .course-card { background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 4px 20px rgba(20,20,42,.06); display:flex; flex-direction:column; }
+  .course-card .cover { aspect-ratio: 16/9; background: linear-gradient(135deg,#8B55FE,#A685FF); display:flex; align-items:flex-end; padding:14px; position:relative; overflow:hidden; }
+  .course-card .cover .module-chip { padding:3px 8px; border-radius:6px; font-size:10.5px; font-weight:600; background:rgba(255,255,255,.85); color:#5029A3; }
+  .course-card .cover .deco { position:absolute; right:-10px; top:-10px; width:80px; opacity:.5; }
+  .course-card .body { padding:16px; }
+  .course-card h4 { margin:0 0 6px; font-family:var(--font-body); font-weight:600; font-size:15px; color:#240C50; line-height:1.25; }
+  .course-card .meta { font-size:11.5px; color:#71717A; display:flex; gap:10px; }
+  .course-card .meta span { display:flex; align-items:center; gap:4px; }
+  .course-card .meta img { width:12px; opacity:.55; }
+  .course-card .pbar { margin-top:10px; height:5px; background:#EFF0F6; border-radius:9999px; overflow:hidden; }
+  .course-card .pbar .pf { height:100%; background:#01DA8C; }
+  .course-card.cover-orange .cover { background: linear-gradient(135deg,#F9912A,#FBBE81); }
+  .course-card.cover-teal   .cover { background: linear-gradient(135deg,#04949D,#21DDE0); }
+  .course-card.cover-pink   .cover { background: linear-gradient(135deg,#F3538E,#F9A6C4); }
+  .course-card.cover-dark   .cover { background: #14142A; }
+
+  /* OKRs */
+  .okr-card { background:#fff; border-radius:16px; padding:22px; box-shadow:0 4px 20px rgba(20,20,42,.06); }
+  .okr-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+  .okr-head h3 { font-family:var(--font-display); font-weight:700; font-size:20px; color:#240C50; margin:0; letter-spacing:-0.01em; }
+  .okr-list { background:#F5F2FF; border-radius:12px; padding:14px; }
+  .obj-row { display:flex; align-items:flex-start; gap:10px; padding:8px 0; }
+  .obj-tag { padding:3px 10px; border-radius:9999px; font-size:10.5px; font-weight:700; flex-shrink:0; border:1.5px solid; line-height:1.6; }
+  .obj-tag.obj { color:#04949D; border-color:#04949D; background:#fff; }
+  .obj-tag.res { color:#5029A3; border-color:#5029A3; background:#fff; }
+  .obj-row .pct { color:#71717A; font-size:11px; flex-shrink:0; }
+  .obj-row .ic { color:#94A3B8; flex-shrink:0; }
+  .obj-row .txt { flex:1; font-size:13.5px; color:#3F3F46; line-height:1.45; }
+  .obj-row .txt em { font-style:normal; color:#240C50; font-weight:500; }
+  .res-row { padding-left:32px; }
+  .okr-footer { margin-top:14px; display:flex; gap:10px; }
+  .btn { font-family:var(--font-body); font-weight:600; font-size:13px; padding:10px 18px; border-radius:9999px; border:none; cursor:pointer; display:inline-flex; align-items:center; gap:6px; transition: all .15s; }
+  .btn-primary { background:#8B55FE; color:#fff; }
+  .btn-primary:hover { background:#7D31F6; }
+  .btn-ghost { background:transparent; border:1.5px solid #8B55FE; color:#8B55FE; font-weight:500; padding:8.5px 18px; }
+  .btn-ghost:hover { background:#F5F2FF; }
+  .btn-dark { background:#14142A; color:#fff; }
+  .btn-ia { background:#fff; color:#5029A3; border:1.5px solid #C3B1FF; font-weight:600; }
+  .btn-ia::before { content:'✦'; color:#8B55FE; margin-right:2px; }
+
+  /* Progress widget */
+  .donut-card { background:#fff; border-radius:14px; padding:18px; box-shadow:0 4px 20px rgba(20,20,42,.06); }
+  .donut-card h4 { margin:0 0 10px; font-size:14px; color:#71717A; font-weight:500; }
+  .donut-wrap { display:flex; align-items:center; justify-content:center; padding:8px 0; }
+  .donut { position:relative; width:120px; height:120px; }
+  .donut svg { transform: rotate(-90deg); }
+  .donut .pct { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:700; font-size:26px; color:#240C50; }
+  .donut-legend { margin-top:12px; padding-top:12px; border-top:1px solid #EFF0F6; }
+  .leg-row { display:flex; justify-content:space-between; padding:6px 0; font-size:13px; color:#3F3F46; }
+  .leg-row .l { display:flex; align-items:center; gap:8px; }
+  .leg-row .pill { width:18px; height:6px; border-radius:9999px; }
+
+  /* Lapzo.IA panel */
+  .ia-panel { position:fixed; right:-380px; top:0; bottom:0; width:360px; background:#fff; box-shadow:-8px 0 32px rgba(20,20,42,.18); z-index:100; transition: right .25s ease; display:flex; flex-direction:column; }
+  .ia-panel.open { right:0; }
+  .ia-panel-head { background: linear-gradient(135deg,#8B55FE,#A685FF); color:#fff; padding:18px; display:flex; align-items:center; gap:10px; }
+  .ia-panel-head .av { width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center; font-size:20px; }
+  .ia-panel-head .nm { font-family:var(--font-display); font-weight:700; font-size:18px; }
+  .ia-panel-head .st { font-size:11px; opacity:.8; }
+  .ia-panel-head .close { margin-left:auto; background:rgba(255,255,255,.2); border:none; color:#fff; width:30px; height:30px; border-radius:50%; cursor:pointer; }
+  .ia-body { flex:1; overflow:auto; padding:18px; background:#FBFAFE; display:flex; flex-direction:column; gap:14px; }
+  .ia-msg { padding:12px 14px; border-radius:14px; font-size:13.5px; line-height:1.5; max-width:90%; }
+  .ia-msg.bot { background:#fff; border:1px solid #EFF0F6; }
+  .ia-msg.user { background:#8B55FE; color:#fff; align-self:flex-end; }
+  .ia-chips { display:flex; gap:6px; flex-wrap:wrap; }
+  .ia-chip { background:#fff; border:1px solid #E2E2E8; padding:7px 12px; border-radius:9999px; font-size:12px; color:#5029A3; cursor:pointer; }
+  .ia-chip:hover { background:#F5F2FF; }
+  .ia-input { padding:14px; border-top:1px solid #EFF0F6; display:flex; gap:8px; background:#fff; }
+  .ia-input input { flex:1; padding:10px 14px; border-radius:9999px; border:1px solid #E2E2E8; font-family:var(--font-body); font-size:13px; outline:none; }
+  .ia-input input:focus { border-color:#8B55FE; }
+  .ia-input button { background:#8B55FE; color:#fff; border:none; border-radius:50%; width:38px; height:38px; cursor:pointer; }
+
+  /* hidden by view */
+  .view { display:none; }
+  .view.active { display:block; }
+
+  .mascot { position:fixed; right:24px; bottom:24px; width:64px; height:64px; cursor:pointer; transition: transform .2s; z-index:50; }
+  .mascot:hover { transform: scale(1.06) rotate(-3deg); }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="../../assets/logo/lapzo-logo-on-dark.png" alt="lapzo" style="height:34px;width:auto">
+    </div>
+
+    <div class="nav-section">Workspace</div>
+    <div class="nav-item" data-view="inicio">
+      <img class="ico" src="../../assets/icons/star.svg"> Inicio
+    </div>
+    <div class="nav-item active" data-view="equipo">
+      <img class="ico" src="../../assets/icons/user.svg"> Mi equipo
+    </div>
+    <div class="nav-item" data-view="capacitacion">
+      <img class="ico" src="../../assets/icons/play.svg"> Capacitación
+    </div>
+    <div class="nav-item" data-view="okrs">
+      <img class="ico" src="../../assets/icons/target.svg"> OKRs
+    </div>
+    <div class="nav-item" data-view="evaluaciones">
+      <img class="ico" src="../../assets/icons/check-circle.svg"> Evaluaciones
+    </div>
+    <div class="nav-item" data-view="catalogo">
+      <img class="ico" src="../../assets/icons/folder.svg"> Catálogo
+    </div>
+
+    <div class="nav-section">Sistema</div>
+    <div class="nav-item">
+      <img class="ico" src="../../assets/icons/message.svg"> Mensajes
+    </div>
+    <div class="nav-item">
+      <img class="ico" src="../../assets/icons/cog.svg"> Configuración
+    </div>
+
+    <div class="footer">
+      <div class="avatar">AP</div>
+      <div class="who">
+        <div class="nm">Andrea Pulido</div>
+        <div class="org">Rotoplas · C&D</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main column -->
+  <div>
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="crumb">
+        <h1 id="pageTitle">Mi equipo</h1>
+      </div>
+      <div class="search">
+        <img class="si" src="../../assets/icons/search.svg" alt="">
+        <input placeholder="Buscar colaborador, curso, OKR…">
+      </div>
+      <button class="ia-btn" id="openIa">lapzo.IA</button>
+      <button class="icon-btn" title="Notificaciones"><img src="../../assets/icons/message.svg"><span class="dot"></span></button>
+      <div class="me">AP</div>
+    </header>
+
+    <main class="main">
+
+      <!-- VIEW: Mi equipo -->
+      <section class="view active" id="view-equipo">
+        <div class="page-head">
+          <div>
+            <h2>Mi equipo</h2>
+            <p class="sub">12 colaboradores con planes de carrera activos · semana del 17 al 23 de noviembre</p>
+          </div>
+          <div class="actions">
+            <button class="btn btn-ghost"><img src="../../assets/icons/cloud-download.svg" style="width:14px"> Exportar</button>
+            <button class="btn btn-primary">+ Asignar curso</button>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="lbl">Cursos completados</div>
+            <div class="num">387</div>
+            <div class="delta">+12% vs. mes anterior</div>
+          </div>
+          <div class="stat">
+            <div class="lbl">En progreso</div>
+            <div class="num">142</div>
+            <div class="delta">+5%</div>
+          </div>
+          <div class="stat">
+            <div class="lbl">Tasa de finalización</div>
+            <div class="num">73%</div>
+            <div class="delta dn">−2% vs. meta</div>
+          </div>
+          <div class="stat">
+            <div class="lbl">Horas formación</div>
+            <div class="num">428h</div>
+            <div class="delta">+18%</div>
+          </div>
+        </div>
+
+        <div class="filters">
+          <div class="field"><img src="../../assets/icons/search.svg"> Buscar…</div>
+          <div class="field"><img src="../../assets/icons/cog.svg"> Filtro</div>
+          <div class="field"><img src="../../assets/icons/check.svg"> Estatus</div>
+          <div class="progress-filter">
+            <span style="color:#71717A">Progreso</span>
+            <div class="rng"><span class="knob"></span></div>
+            <span style="color:#3F3F46;font-weight:600">0% – 100%</span>
+          </div>
+        </div>
+
+        <div class="team-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Colaborador</th>
+                <th>Contenido</th>
+                <th>Tipo</th>
+                <th>Progreso</th>
+                <th>Estatus</th>
+                <th>Inicio</th>
+                <th>Finalización</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="person"><div class="ava">AJ</div>Alice Johnson</div></td>
+                <td>Full Stack Path</td>
+                <td>Curso</td>
+                <td><div class="progress-cell"><div class="bar"><div class="fill" style="width:100%"></div></div><span class="pct">100%</span></div></td>
+                <td><span class="status-pill ok"><span class="dot"></span>Aprobado</span></td>
+                <td class="date-cell">Dic 31, 2023</td>
+                <td class="date-cell">Ene 15, 2024</td>
+                <td><span class="kebab">⋯</span></td>
+              </tr>
+              <tr>
+                <td><div class="person"><div class="ava b">AP</div>Alicia Pulido</div></td>
+                <td>Introducción a React</td>
+                <td>Curso</td>
+                <td><div class="progress-cell"><div class="bar"><div class="fill" style="width:100%"></div></div><span class="pct">100%</span></div></td>
+                <td><span class="status-pill ok"><span class="dot"></span>Aprobado</span></td>
+                <td class="date-cell">Dic 14, 2023</td>
+                <td class="date-cell">Sin fecha de finalización</td>
+                <td><span class="kebab">⋯</span></td>
+              </tr>
+              <tr>
+                <td><div class="person"><div class="ava c">BS</div>Bob Smith</div></td>
+                <td>Full Stack Path</td>
+                <td>Ruta</td>
+                <td><div class="progress-cell"><div class="bar"><div class="fill warn" style="width:18%"></div></div><span class="pct">18%</span></div></td>
+                <td><span class="status-pill wip"><span class="dot"></span>En progreso</span></td>
+                <td class="date-cell">Nov 20, 2023</td>
+                <td class="date-cell alert">Jul 07, 2024</td>
+                <td class="row-menu" id="kebabRow">
+                  <span class="kebab">⋯</span>
+                  <div class="menu-pop" id="rowMenu" style="display:none">
+                    <div class="mi">Ver detalle <span class="ico">›</span></div>
+                    <div class="mi" style="background:#F3538E;color:#fff;">Enviar recordatorio <span>🔔</span></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><div class="person"><div class="ava d">DB</div>David Brown</div></td>
+                <td>DevOps Path</td>
+                <td>Ruta</td>
+                <td><div class="progress-cell"><div class="bar"><div class="fill warn" style="width:18%"></div></div><span class="pct">18%</span></div></td>
+                <td><span class="status-pill wip"><span class="dot"></span>En progreso</span></td>
+                <td class="date-cell">May 12, 2023</td>
+                <td class="date-cell">—</td>
+                <td><span class="kebab">⋯</span></td>
+              </tr>
+              <tr>
+                <td><div class="person"><div class="ava e">CW</div>Carol White</div></td>
+                <td>NodeJS Advanced</td>
+                <td>Curso</td>
+                <td><div class="progress-cell"><div class="bar"><div class="fill warn" style="width:18%"></div></div><span class="pct">18%</span></div></td>
+                <td><span class="status-pill fail"><span class="dot"></span>Reprobado</span></td>
+                <td class="date-cell">Dic 31, 2023</td>
+                <td class="date-cell">—</td>
+                <td><span class="kebab">⋯</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="table-foot">Renglones por página · 5 de 12</div>
+        </div>
+      </section>
+
+      <!-- VIEW: Capacitación -->
+      <section class="view" id="view-capacitacion">
+        <div class="page-head">
+          <div>
+            <h2>Capacitación y aprendizaje</h2>
+            <p class="sub">Cursos asignados, rutas y catálogo de +800 cursos.</p>
+          </div>
+          <div class="actions">
+            <button class="btn btn-ia">Crear curso con IA</button>
+            <button class="btn btn-primary">+ Nuevo curso</button>
+          </div>
+        </div>
+
+        <div class="grid-courses">
+          <div class="course-card">
+            <div class="cover"><img class="deco" src="../../assets/decor/star.svg"><span class="module-chip">CyA · Liderazgo</span></div>
+            <div class="body">
+              <h4>Liderazgo para mandos medios</h4>
+              <div class="meta"><span>● 8 lecciones</span><span>● 2h 40m</span></div>
+              <div class="pbar"><div class="pf" style="width:62%"></div></div>
+            </div>
+          </div>
+          <div class="course-card cover-orange">
+            <div class="cover"><img class="deco" src="../../assets/decor/flower.svg"><span class="module-chip">CyA · Onboarding</span></div>
+            <div class="body">
+              <h4>Bienvenida a Rotoplas: tu primer mes</h4>
+              <div class="meta"><span>● 12 lecciones</span><span>● 4h 20m</span></div>
+              <div class="pbar"><div class="pf" style="width:100%"></div></div>
+            </div>
+          </div>
+          <div class="course-card cover-teal">
+            <div class="cover"><img class="deco" src="../../assets/decor/wave-teal.svg" style="width:120px;opacity:.6"><span class="module-chip">DxC · Hard skills</span></div>
+            <div class="body">
+              <h4>Excel avanzado para reportes ejecutivos</h4>
+              <div class="meta"><span>● 14 lecciones</span><span>● 5h 10m</span></div>
+              <div class="pbar"><div class="pf" style="width:28%"></div></div>
+            </div>
+          </div>
+          <div class="course-card cover-pink">
+            <div class="cover"><img class="deco" src="../../assets/decor/flower-thin.svg"><span class="module-chip">EVA · Cultura</span></div>
+            <div class="body">
+              <h4>Conversaciones difíciles con tu equipo</h4>
+              <div class="meta"><span>● 6 lecciones</span><span>● 1h 50m</span></div>
+              <div class="pbar"><div class="pf" style="width:0%"></div></div>
+            </div>
+          </div>
+          <div class="course-card cover-dark">
+            <div class="cover"><img class="deco" src="../../assets/decor/arrow-curve-violet.svg" style="opacity:.8"><span class="module-chip" style="background:#8B55FE;color:#fff">DC3 · Certificación</span></div>
+            <div class="body">
+              <h4>Seguridad industrial — NOM-035</h4>
+              <div class="meta"><span>● 9 lecciones</span><span>● 3h 30m</span><span>● DC3</span></div>
+              <div class="pbar"><div class="pf" style="width:74%"></div></div>
+            </div>
+          </div>
+          <div class="course-card">
+            <div class="cover" style="background:linear-gradient(135deg,#54F4F2,#92FDF7)"><img class="deco" src="../../assets/decor/star.svg" style="opacity:.5"><span class="module-chip">DxC · Soft skills</span></div>
+            <div class="body">
+              <h4>Feedback continuo: cómo darlo y recibirlo</h4>
+              <div class="meta"><span>● 5 lecciones</span><span>● 1h 30m</span></div>
+              <div class="pbar"><div class="pf" style="width:40%"></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW: OKRs -->
+      <section class="view" id="view-okrs">
+        <div class="page-head">
+          <div>
+            <h2>OKRs · Q4 2025</h2>
+            <p class="sub">Objetivos del equipo de Producto.</p>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 320px; gap:20px;">
+          <div class="okr-card">
+            <div class="okr-head">
+              <h3>Creación de OKRs</h3>
+              <button class="btn btn-primary" style="font-size:12px;padding:8px 18px">Publicar</button>
+            </div>
+            <div class="okr-list">
+              <div class="obj-row">
+                <span class="obj-tag obj">OBJ</span>
+                <span class="ic">👤</span>
+                <div class="txt"><em>Mejorar la usabilidad del producto</em></div>
+              </div>
+              <div class="obj-row res-row">
+                <span class="obj-tag res">RES</span>
+                <span class="ic">👤</span>
+                <div class="txt">Reducir el tiempo de carga de la página de inicio en un <em>20%</em></div>
+              </div>
+              <div class="obj-row res-row">
+                <span class="obj-tag res">RES</span>
+                <span class="ic">👤</span>
+                <div class="txt">Implementar <em>3 nuevas características</em> solicitadas por los usuarios</div>
+              </div>
+            </div>
+            <div class="okr-footer">
+              <button class="btn btn-ghost">▼ Agregar OKR</button>
+              <button class="btn btn-ia">Inteligencia artificial</button>
+            </div>
+          </div>
+
+          <div class="donut-card">
+            <h4>Progreso general</h4>
+            <div class="donut-wrap">
+              <div class="donut">
+                <svg width="120" height="120" viewBox="0 0 120 120">
+                  <circle cx="60" cy="60" r="48" stroke="#EFF0F6" stroke-width="14" fill="none"/>
+                  <circle cx="60" cy="60" r="48" stroke="#8B55FE" stroke-width="14" fill="none"
+                          stroke-dasharray="301.6" stroke-dashoffset="202" stroke-linecap="round"/>
+                </svg>
+                <div class="pct">33%</div>
+              </div>
+            </div>
+            <div class="donut-legend">
+              <div class="leg-row"><div class="l"><div class="pill" style="background:#01DA8C"></div>Cerrados</div><div>1</div></div>
+              <div class="leg-row"><div class="l"><div class="pill" style="background:#8B55FE"></div>En progreso</div><div>2</div></div>
+              <div class="leg-row"><div class="l"><div class="pill" style="background:#F3538E"></div>Atrasados</div><div>1</div></div>
+              <div class="leg-row"><div class="l"><div class="pill" style="background:#94A3B8"></div>Sin comenzar</div><div>1</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW: Inicio -->
+      <section class="view" id="view-inicio">
+        <div class="page-head">
+          <div>
+            <h2>Hola, Andrea ✦</h2>
+            <p class="sub">Esto es lo que necesitas atender hoy.</p>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:20px;">
+          <div class="card-hard" style="background:linear-gradient(135deg,#5029A3 0%,#8B55FE 60%,#C3B1FF 100%);color:#fff;border-color:#240C50;">
+            <div style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.85;margin-bottom:6px">Caso del mes</div>
+            <div style="font-family:var(--font-display);font-weight:700;font-size:26px;line-height:1.05;letter-spacing:-0.02em;margin-bottom:8px">Mazda alcanzó +63 mil cursos terminados en un año.</div>
+            <button class="btn" style="background:#fff;color:#5029A3">Leer caso</button>
+          </div>
+          <div class="card-ia">
+            <div style="position:absolute;top:-12px;left:14px;background:#fff;border:1px solid #C3B1FF;border-radius:9999px;padding:3px 10px;font-size:10.5px;font-weight:600;color:#5029A3">✦ lapzo.IA</div>
+            <h4 style="margin:6px 0 6px;font-weight:600;color:#240C50">Sugerencia del copiloto</h4>
+            <p style="margin:0;font-size:13px;color:#3F3F46;line-height:1.5">Tu equipo de Ventas tiene 3 brechas de competencias. ¿Genero un plan de capacitación?</p>
+            <button class="btn btn-primary" style="margin-top:10px;font-size:12px;padding:8px 16px">Generar plan</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-evaluaciones">
+        <div class="page-head">
+          <div><h2>Evaluaciones y clima</h2><p class="sub">9-box, 360° y encuestas de clima.</p></div>
+        </div>
+        <div class="card" style="text-align:center;padding:60px;color:#71717A;">
+          <img src="../../assets/lapzi/lapzi-curious.png" style="width:96px;margin-bottom:14px">
+          <p>Esta sección de la demo aún no está cargada.</p>
+        </div>
+      </section>
+
+      <section class="view" id="view-catalogo">
+        <div class="page-head">
+          <div><h2>Catálogo</h2><p class="sub">+800 cursos listos para asignar.</p></div>
+        </div>
+        <div class="card" style="text-align:center;padding:60px;color:#71717A;">
+          <img src="../../assets/lapzi/lapzi-reading.png" style="width:96px;margin-bottom:14px">
+          <p>Esta sección de la demo aún no está cargada.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- Lapzo.IA panel -->
+<aside class="ia-panel" id="iaPanel">
+  <div class="ia-panel-head">
+    <div class="av">✦</div>
+    <div>
+      <div class="nm">lapzo.IA</div>
+      <div class="st">Copiloto · siempre listo</div>
+    </div>
+    <button class="close" id="closeIa">×</button>
+  </div>
+  <div class="ia-body" id="iaBody">
+    <div class="ia-msg bot">¡Hola Andrea! Veo que tu equipo de Producto va al <b>33%</b> de sus OKRs del Q4. ¿Quieres que te muestre las acciones con mayor impacto para cerrar el trimestre?</div>
+    <div class="ia-chips">
+      <div class="ia-chip">Ver acciones prioritarias</div>
+      <div class="ia-chip">Generar curso desde un PDF</div>
+      <div class="ia-chip">Mapear competencias del equipo</div>
+    </div>
+  </div>
+  <form class="ia-input" id="iaForm">
+    <input id="iaInput" placeholder="Pregúntale a Lapzo.IA…">
+    <button type="submit"><img src="../../assets/icons/send.svg" style="filter:invert(1);width:16px;"></button>
+  </form>
+</aside>
+
+<!-- Lapzi mascot -->
+<img class="mascot" id="mascot" src="../../assets/lapzi/lapzi-happy.png" alt="Lapzi">
+
+<script>
+  // View switcher
+  const navItems = document.querySelectorAll('.nav-item[data-view]');
+  const views = document.querySelectorAll('.view');
+  const titleMap = {
+    inicio: 'Inicio',
+    equipo: 'Mi equipo',
+    capacitacion: 'Capacitación',
+    okrs: 'OKRs',
+    evaluaciones: 'Evaluaciones',
+    catalogo: 'Catálogo',
+  };
+  navItems.forEach(n => n.addEventListener('click', () => {
+    navItems.forEach(x => x.classList.remove('active'));
+    n.classList.add('active');
+    const v = n.getAttribute('data-view');
+    views.forEach(view => view.classList.toggle('active', view.id === 'view-' + v));
+    document.getElementById('pageTitle').textContent = titleMap[v] || '';
+  }));
+
+  // Row kebab menu (toggle)
+  const kebabRow = document.getElementById('kebabRow');
+  const rowMenu = document.getElementById('rowMenu');
+  let menuOpen = true;
+  rowMenu.style.display = 'block';
+  kebabRow.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menuOpen = !menuOpen;
+    rowMenu.style.display = menuOpen ? 'block' : 'none';
+  });
+  document.addEventListener('click', () => { rowMenu.style.display='none'; menuOpen=false; });
+
+  // IA panel
+  const openIa = document.getElementById('openIa');
+  const closeIa = document.getElementById('closeIa');
+  const iaPanel = document.getElementById('iaPanel');
+  openIa.addEventListener('click', () => iaPanel.classList.add('open'));
+  closeIa.addEventListener('click', () => iaPanel.classList.remove('open'));
+  document.getElementById('mascot').addEventListener('click', () => iaPanel.classList.toggle('open'));
+
+  document.querySelectorAll('.ia-chip').forEach(c => c.addEventListener('click', () => {
+    const body = document.getElementById('iaBody');
+    const u = document.createElement('div'); u.className='ia-msg user'; u.textContent = c.textContent;
+    body.appendChild(u);
+    const b = document.createElement('div'); b.className='ia-msg bot'; b.textContent = 'Claro, déjame analizarlo… ✦';
+    body.appendChild(b);
+    body.scrollTop = body.scrollHeight;
+  }));
+
+  document.getElementById('iaForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const i = document.getElementById('iaInput');
+    if (!i.value.trim()) return;
+    const body = document.getElementById('iaBody');
+    const u = document.createElement('div'); u.className='ia-msg user'; u.textContent = i.value;
+    body.appendChild(u);
+    i.value = '';
+    setTimeout(() => {
+      const b = document.createElement('div'); b.className='ia-msg bot';
+      b.innerHTML = 'Buena pregunta. Te ayudo a desglosarlo. ✦';
+      body.appendChild(b);
+      body.scrollTop = body.scrollHeight;
+    }, 400);
+    body.scrollTop = body.scrollHeight;
+  });
+</script>
+
+</body>
+</html>

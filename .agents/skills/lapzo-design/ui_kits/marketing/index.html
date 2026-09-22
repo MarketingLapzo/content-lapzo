@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>lapzo — Aliado estratégico en desarrollo de talento</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  :root {
+    --max: 1200px;
+  }
+  body { margin:0; background:#fff; color:#3F3F46; }
+
+  /* Nav */
+  nav.top { position:sticky; top:0; z-index:50; background:rgba(255,255,255,.85); backdrop-filter: blur(16px); border-bottom:1px solid #EFF0F6; }
+  nav.top .wrap { max-width: var(--max); margin:0 auto; padding:14px 28px; display:flex; align-items:center; gap:24px; }
+  nav.top img.logo { height:34px; }
+  nav.top .links { display:flex; gap:24px; flex:1; }
+  nav.top .links a { color:#3F3F46; text-decoration:none; font-size:14px; font-weight:500; }
+  nav.top .links a:hover { color:#8B55FE; }
+  .btn { font-family:var(--font-body); font-weight:600; font-size:14px; padding:11px 22px; border-radius:9999px; border:none; cursor:pointer; display:inline-flex; align-items:center; gap:6px; transition: all .15s; text-decoration:none; }
+  .btn-primary { background:#8B55FE; color:#fff; }
+  .btn-primary:hover { background:#7D31F6; }
+  .btn-ghost { background:transparent; border:1.5px solid #8B55FE; color:#8B55FE; font-weight:500; padding:9.5px 22px; }
+  .btn-ghost:hover { background:#F5F2FF; }
+  .btn-dark { background:#14142A; color:#fff; }
+  .btn-lg { padding:16px 30px; font-size:16px; }
+  .btn-ia { background:#fff; color:#5029A3; border:1.5px solid #C3B1FF; }
+  .btn-ia::before { content:'✦'; color:#8B55FE; margin-right:2px; }
+
+  /* Hero */
+  .hero { position:relative; overflow:hidden; background:#FBFAFE; }
+  .hero .wrap { max-width: var(--max); margin:0 auto; padding:70px 28px 80px; display:grid; grid-template-columns: 1.1fr 1fr; gap:50px; align-items:center; }
+  .hero .eye { display:inline-flex; align-items:center; gap:8px; padding:6px 14px; background:#ECE8FF; color:#5029A3; font-size:12.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; border-radius:9999px; margin-bottom:18px; }
+  .hero h1 { font-family: var(--font-display); font-weight:700; font-size: clamp(38px, 5.5vw, 64px); line-height:1.0; letter-spacing:-0.02em; color:#240C50; margin:0 0 18px; text-wrap:balance; }
+  .hero h1 .accent { position:relative; display:inline-block; color:#8B55FE; font-style:italic; font-family:var(--font-body); font-weight:600;}
+  .hero h1 .accent::after { content:''; position:absolute; left:-6px; right:-6px; bottom:-2px; height:8px; background:url('../../assets/decor/squiggle-line-teal.svg') center/contain no-repeat; }
+  .hero p.lede { font-size:17px; line-height:1.55; color:#3F3F46; margin:0 0 26px; max-width:520px; }
+  .hero .ctas { display:flex; gap:12px; }
+  .hero .proof { margin-top:30px; font-size:12px; color:#71717A; }
+
+  .hero .stage { position:relative; aspect-ratio:1; max-width:480px; margin:0 auto; }
+  .hero .stage .grad { position:absolute; inset:6%; border-radius:50%; background: radial-gradient(circle at 30% 30%, #C3B1FF, #8B55FE 50%, #5029A3 95%); filter: blur(20px); opacity:.55; }
+  .hero .stage .circle { position:absolute; inset:0; border:2px dashed #C3B1FF; border-radius:50%; transform: rotate(-12deg); }
+  .hero .stage .ui-prog { position:absolute; top:8%; left:0; width:50%; transform: rotate(-3deg); border-radius:14px; box-shadow:0 20px 50px rgba(20,20,42,.18); border:1.5px solid #14142A; }
+  .hero .stage .ui-okr { position:absolute; bottom:6%; right:0; width:62%; transform: rotate(2deg); border-radius:14px; box-shadow:0 20px 50px rgba(20,20,42,.18); }
+  .hero .stage .lapzi { position:absolute; bottom:-10px; left:0; width:110px; transform: rotate(-8deg); }
+  .hero .stage .arrow { position:absolute; top:18%; right:-30px; width:90px; transform: rotate(20deg); }
+  .hero .stage .star { position:absolute; top:-6px; right:18%; width:34px; }
+
+  .hero .decor-arrow { position:absolute; left:30%; top:120px; width:130px; opacity:.4; pointer-events:none; }
+
+  /* Logos band */
+  .logos { background:#fff; padding: 36px 28px; border-top:1px solid #EFF0F6; border-bottom:1px solid #EFF0F6; }
+  .logos .wrap { max-width: var(--max); margin:0 auto; text-align:center; }
+  .logos .label { font-size:11.5px; color:#71717A; letter-spacing:.08em; text-transform:uppercase; margin-bottom:18px; }
+  .logos .row { display:flex; justify-content:space-around; gap:34px; flex-wrap:wrap; align-items:center; font-family:var(--font-display); font-weight:700; font-size:22px; color:#94A3B8; letter-spacing:0; }
+  .logos .row span { opacity:.85; }
+  .logos .row span:hover { color:#5029A3; }
+
+  /* Section base */
+  section.s { padding: 80px 28px; }
+  section.s .wrap { max-width: var(--max); margin:0 auto; }
+  .eyebrow { font-size:12.5px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#8B55FE; }
+  .sec-head { text-align:center; max-width:680px; margin:0 auto 50px; }
+  .sec-head h2 { font-family:var(--font-display); font-weight:700; font-size: clamp(28px, 3.4vw, 44px); line-height:1.05; letter-spacing:-0.02em; color:#240C50; margin:8px 0 12px; text-wrap:balance; }
+  .sec-head p { font-size:16px; color:#3F3F46; line-height:1.55; margin:0; }
+  .sec-head.left { text-align:left; max-width:none; }
+
+  /* Modules grid */
+  .modules { background:#F8FAFC; }
+  .modules .grid { display:grid; grid-template-columns: repeat(3,1fr); gap:18px; }
+  .modules .card { background:#fff; border-radius:18px; padding:24px; border:1px solid #EFF0F6; transition: all .2s; cursor:pointer; position:relative; overflow:hidden; }
+  .modules .card:hover { transform: translateY(-3px); border-color:#C3B1FF; box-shadow:0 12px 28px rgba(139,85,254,.10); }
+  .modules .card img.ico { width:54px; height:54px; margin-bottom:14px; }
+  .modules .card .abbr { display:inline-block; padding:3px 8px; border-radius:6px; font-size:11px; font-weight:700; background:#ECE8FF; color:#5029A3; margin-bottom:8px; }
+  .modules .card h3 { font-family:var(--font-body); font-weight:600; font-size:18px; color:#240C50; margin:0 0 6px; }
+  .modules .card p { font-size:13.5px; color:#3F3F46; line-height:1.5; margin:0; }
+  .modules .card .arrow { position:absolute; right:18px; top:24px; color:#94A3B8; transition: transform .2s, color .2s; }
+  .modules .card:hover .arrow { transform: translateX(4px); color:#8B55FE; }
+
+  /* Case studies */
+  .cases { background:#14142A; color:#fff; }
+  .cases .sec-head h2 { color:#fff; }
+  .cases .sec-head p { color:rgba(255,255,255,.7); }
+  .cases .grid { display:grid; grid-template-columns: 1.4fr 1fr 1fr; gap:18px; }
+  .cases .case { background: rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:28px; position:relative; overflow:hidden; }
+  .cases .case .stat { font-family:var(--font-display); font-weight:700; font-size:54px; line-height:1; letter-spacing:-0.02em; color:#fff; margin-bottom:6px; }
+  .cases .case .stat .accent { color:#8B55FE; }
+  .cases .case h4 { font-family:var(--font-body); font-weight:600; font-size:16px; color:#fff; margin:0 0 6px; }
+  .cases .case p { color:rgba(255,255,255,.7); font-size:13.5px; line-height:1.5; margin:0; }
+  .cases .case.featured { background: linear-gradient(135deg, #5029A3 0%, #8B55FE 100%); border:none; }
+  .cases .case.featured .stat .accent { color:#54F4F2; }
+  .cases .case.featured p { color: rgba(255,255,255,.85); }
+  .cases .case .deco { position:absolute; right:-14px; bottom:-14px; width:120px; opacity:.18; }
+  .cases .footnote { text-align:center; color:rgba(255,255,255,.5); font-size:12px; margin-top:24px; font-style:italic; }
+
+  /* IA strip */
+  .ia-strip { background: linear-gradient(135deg, #5029A3 0%, #8B55FE 60%, #C3B1FF 100%); color:#fff; position:relative; overflow:hidden; padding: 80px 28px; }
+  .ia-strip .wrap { max-width:var(--max); margin:0 auto; display:grid; grid-template-columns: 1fr 1fr; gap:40px; align-items:center; }
+  .ia-strip .eyebrow { color:#A685FF; }
+  .ia-strip h2 { font-family:var(--font-display); font-weight:700; font-size: clamp(32px, 4vw, 50px); line-height:1.05; letter-spacing:-0.02em; color:#fff; margin: 6px 0 16px; }
+  .ia-strip h2 em { color:#54F4F2; font-style:italic; font-family:var(--font-body); }
+  .ia-strip p { font-size:16px; line-height:1.6; opacity:.9; margin:0 0 24px; }
+  .ia-strip .caps { display:flex; gap:8px; flex-wrap:wrap; margin-top:18px; }
+  .ia-strip .cap { background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); backdrop-filter: blur(6px); padding:8px 14px; border-radius:9999px; font-size:13px; font-weight:500; }
+  .ia-strip .cap::before { content:'✦  '; opacity:.7; }
+  .ia-strip .stage-ia { position:relative; aspect-ratio:1; }
+  .ia-strip .stage-ia .lapzi-ia { position:absolute; right:8%; top:10%; width:46%; filter: drop-shadow(0 24px 40px rgba(0,0,0,.3)); }
+  .ia-strip .stage-ia .chat-bubble { position:absolute; background:rgba(255,255,255,.96); color:#3F3F46; padding:16px 18px; border-radius:18px; box-shadow:0 12px 28px rgba(20,20,42,.2); max-width:280px; font-size:13.5px; }
+  .ia-strip .stage-ia .chat-bubble.b1 { top:8%; left:0; }
+  .ia-strip .stage-ia .chat-bubble.b1 .lbl { font-size:11px; font-weight:700; color:#8B55FE; margin-bottom:4px; letter-spacing:.04em; text-transform:uppercase; }
+  .ia-strip .stage-ia .chat-bubble.b1 .lbl::before { content:'✦ '; }
+  .ia-strip .stage-ia .chat-bubble.b2 { bottom:6%; left:8%; background:#54F4F2; color:#012D33; }
+
+  /* Verticales */
+  .verticals { background:#F5F2FF; }
+  .verticals .vbar { display:grid; grid-template-columns: repeat(6,1fr); gap:0; background:#fff; border-radius:18px; overflow:hidden; box-shadow:0 6px 24px rgba(20,20,42,.06); }
+  .verticals .v { padding:24px; text-align:center; border-right:1px solid #EFF0F6; }
+  .verticals .v:last-child { border-right:0; }
+  .verticals .v .nm { font-family:var(--font-display); font-weight:700; font-size:14px; color:#240C50; }
+  .verticals .v .cnt { font-size:32px; font-family:var(--font-display); font-weight:700; color:#8B55FE; line-height:1; margin-bottom:6px; letter-spacing:-0.02em; }
+  .verticals .v .ex { font-size:11.5px; color:#71717A; margin-top:4px; }
+
+  /* Persona */
+  .personas { background:#fff; }
+  .personas .tabs { display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap; }
+  .personas .tab { padding:8px 16px; border-radius:9999px; border:1px solid #E2E2E8; background:#fff; cursor:pointer; font-size:13px; font-weight:500; color:#3F3F46; }
+  .personas .tab.active { background:#240C50; color:#fff; border-color:#240C50; }
+  .personas .panel { display:grid; grid-template-columns: 1fr 1fr; gap:40px; align-items:center; }
+  .personas .panel h3 { font-family:var(--font-display); font-weight:700; font-size:32px; color:#240C50; margin:0 0 10px; letter-spacing:-0.02em; }
+  .personas .panel .quote { font-size:18px; font-style:italic; color:#5029A3; line-height:1.5; border-left:3px solid #8B55FE; padding:6px 0 6px 16px; margin: 14px 0; }
+  .personas .panel ul { list-style:none; padding:0; margin: 14px 0; }
+  .personas .panel ul li { padding:7px 0; display:flex; gap:10px; font-size:14px; }
+  .personas .panel ul li::before { content:'✓'; color:#01DA8C; font-weight:700; flex-shrink:0; }
+  .personas .panel .ph { aspect-ratio:1.2; border-radius:18px; background: linear-gradient(135deg,#FDE0C3,#FBBE81); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+  .personas .panel .ph::before { content:''; position:absolute; inset:0; background: radial-gradient(circle at 70% 30%, rgba(255,255,255,.4), transparent 60%); }
+  .personas .panel .ph .lapzi { position:absolute; right:18px; bottom:18px; width:84px; }
+  .personas .panel .ph .label { font-family:var(--font-display); font-weight:700; font-size:36px; color:#3F3F46; padding:24px; line-height:1.05; position:relative; z-index:1; }
+
+  /* CTA strip */
+  .cta-strip { padding: 70px 28px; background:#FBFAFE; }
+  .cta-strip .wrap { max-width:var(--max); margin:0 auto; background: #14142A; border-radius:24px; padding:50px; display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap; position:relative; overflow:hidden; }
+  .cta-strip h2 { font-family:var(--font-display); font-weight:700; font-size:38px; line-height:1.05; color:#fff; margin:0; letter-spacing:-0.02em; max-width:600px; }
+  .cta-strip h2 em { color:#54F4F2; font-style:italic; font-family:var(--font-body); }
+  .cta-strip .deco { position:absolute; right:30px; top:-30px; width:120px; opacity:.25; }
+  .cta-strip .actions { display:flex; gap:12px; }
+
+  /* Footer */
+  footer { background:#0a0a1a; color:#fff; padding: 56px 28px 24px; }
+  footer .wrap { max-width:var(--max); margin:0 auto; }
+  footer .top { display:grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap:40px; padding-bottom:36px; border-bottom:1px solid rgba(255,255,255,.08); }
+  footer .top .brand img { height:36px; margin-bottom:14px; }
+  footer .top .brand p { color:rgba(255,255,255,.6); font-size:13.5px; line-height:1.55; margin: 8px 0 16px; max-width:280px; }
+  footer .top h5 { font-family:var(--font-body); font-weight:600; font-size:13px; color:#fff; margin:0 0 12px; }
+  footer .top ul { list-style:none; padding:0; margin:0; }
+  footer .top li { padding:5px 0; }
+  footer .top a { color:rgba(255,255,255,.65); text-decoration:none; font-size:13.5px; }
+  footer .top a:hover { color:#A685FF; }
+  footer .bottom { display:flex; justify-content:space-between; padding-top:24px; color:rgba(255,255,255,.4); font-size:12px; flex-wrap:wrap; gap:12px; }
+  footer .bottom .partners { display:flex; gap:18px; align-items:center; color:rgba(255,255,255,.5); }
+  footer .bottom .partners span { padding:4px 10px; border:1px solid rgba(255,255,255,.12); border-radius:6px; font-family:var(--font-display); font-weight:600; font-size:11px; letter-spacing:.04em; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top">
+  <div class="wrap">
+    <img class="logo" src="../../assets/logo/lapzo-logo.png" alt="lapzo">
+    <div class="links">
+      <a href="#">Producto</a>
+      <a href="#">Soluciones</a>
+      <a href="#">Casos de éxito</a>
+      <a href="#">lapzo.IA</a>
+      <a href="#">Recursos</a>
+      <a href="#">Precios</a>
+    </div>
+    <a class="btn btn-ghost" href="#">Iniciar sesión</a>
+    <a class="btn btn-primary" href="#">Agendar demo</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="decor-arrow" src="../../assets/decor/arrow-curve-violet.svg" alt="">
+  <div class="wrap">
+    <div>
+      <div class="eye">Aliado estratégico en talento</div>
+      <h1>Transformamos <span class="accent">talento en acción</span>, generando impacto en el negocio.</h1>
+      <p class="lede">LMS, People Analytics y un copiloto de IA en una sola plataforma. Para empresas mexicanas y de LATAM que ya no quieren elegir entre desarrollar a su gente o crecer rápido.</p>
+      <div class="ctas">
+        <a class="btn btn-primary btn-lg" href="#">Agendar demo →</a>
+        <a class="btn btn-ghost btn-lg" href="#">Ver caso Mazda</a>
+      </div>
+      <div class="proof">✦ Cocreado con expertos de RH · Avalado por Tecmilenio · YCombinator</div>
+    </div>
+    <div class="stage">
+      <div class="grad"></div>
+      <div class="circle"></div>
+      <img class="ui-prog" src="../../assets/ui-shots/progress-card.png" alt="">
+      <img class="ui-okr" src="../../assets/ui-shots/okr-card.png" alt="">
+      <img class="lapzi" src="../../assets/lapzi/lapzi-yougotthis.png" alt="">
+      <img class="arrow" src="../../assets/decor/arrow-loop-teal.svg" alt="">
+      <img class="star" src="../../assets/decor/star.svg" alt="">
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS BAND -->
+<div class="logos">
+  <div class="wrap">
+    <div class="label">Más de 200 empresas en México y LATAM confían en Lapzo</div>
+    <div class="row">
+      <span>MAZDA</span><span>ROTOPLAS</span><span>FEMSA</span><span>OXXO</span><span>HOME&nbsp;DEPOT</span><span>GBM</span><span>NATURA</span><span>HYUNDAI</span>
+    </div>
+  </div>
+</div>
+
+<!-- MODULES -->
+<section class="s modules">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Un sistema, no 6 herramientas</div>
+      <h2>Todo el ciclo de talento, conectado.</h2>
+      <p>Aprendizaje, competencias, evaluaciones, OKRs, desempeño y reclutamiento — todo en una sola plataforma, cocreada con expertos de RH.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <img class="ico" src="../../assets/modules/icon-training-orange.svg">
+        <span class="abbr" style="background:#FDE0C3;color:#7A3A0A">CyA</span>
+        <h3>Capacitación y aprendizaje</h3>
+        <p>LMS con cursos, rutas personalizadas y certificaciones DC3/DC4. Crea cursos con IA desde un PDF en minutos.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="card">
+        <img class="ico" src="../../assets/modules/icon-competencies.svg">
+        <span class="abbr">DxC</span>
+        <h3>Desarrollo por competencias</h3>
+        <p>Mapea brechas, define planes individuales de desarrollo (PIDs) y mide el avance real de tu equipo.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="card">
+        <img class="ico" src="../../assets/modules/icon-eval-pink-dark.svg">
+        <span class="abbr" style="background:#FFD3E3;color:#5A1838">EVA</span>
+        <h3>Evaluaciones y clima</h3>
+        <p>360°, 9-box, NOM-035 y encuestas de clima con análisis de sentimiento de comentarios abiertos.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="card">
+        <img class="ico" src="../../assets/modules/icon-eval-pink.svg">
+        <span class="abbr" style="background:#FFD3E3;color:#5A1838">S&E</span>
+        <h3>Estrategia y ejecución</h3>
+        <p>OKRs alineados al rol con sugerencias de Lapzo.IA y check-ins semanales que sí pasan.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="card">
+        <img class="ico" src="../../assets/modules/icon-rocket-violet.svg">
+        <span class="abbr">TaaS</span>
+        <h3>Talent-as-a-Service</h3>
+        <p>¿Empresa de 25–60 personas? Lapzo opera el ciclo completo de talento por ti.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="card">
+        <img class="ico" src="../../assets/modules/icon-mortarboard.svg">
+        <span class="abbr">CAT</span>
+        <h3>Catálogo · +800 cursos</h3>
+        <p>Listos para asignar en español, inglés y portugués. Powered by Tecmilenio.</p>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section class="s cases">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow" style="color:#54F4F2">Casos de éxito · datos reales</div>
+      <h2>Empresas que ya transformaron su talento en acción.</h2>
+    </div>
+    <div class="grid">
+      <div class="case featured">
+        <div class="stat"><span class="accent">+63,000</span></div>
+        <h4>cursos terminados en un año</h4>
+        <p>Descubre cómo <em>Mazda</em> construyó una experiencia de aprendizaje masiva, gamificada y medible para sus equipos en planta y oficina.</p>
+        <img class="deco" src="../../assets/decor/star.svg" alt="">
+      </div>
+      <div class="case">
+        <div class="stat"><span class="accent">15 min</span></div>
+        <h4>en crear una ruta de aprendizaje</h4>
+        <p>Tecmilenio redujo el tiempo de diseño instruccional con Lapzo.IA.</p>
+        <img class="deco" src="../../assets/decor/flower.svg" alt="">
+      </div>
+      <div class="case">
+        <div class="stat"><span class="accent">+100</span></div>
+        <h4>cursos a la medida en 3 idiomas</h4>
+        <p>Rotoplas creó una universidad corporativa multilingüe operada con Lapzo.</p>
+        <img class="deco" src="../../assets/decor/plus.svg" alt="">
+      </div>
+    </div>
+    <div class="footnote">Datos verificados con cada cliente. Casos sujetos a autorización.</div>
+  </div>
+</section>
+
+<!-- IA STRIP -->
+<section class="ia-strip">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Conoce a lapzo.IA</div>
+      <h2>Tu copiloto de RH, <em>no tu reemplazo</em>.</h2>
+      <p>Lapzo.IA sugiere, analiza y acelera — pero las decisiones siguen siendo tuyas. Diseñado para ahorrar tiempo a Andrea, Sofía y Pedro en las tareas que más duelen.</p>
+      <div class="caps">
+        <span class="cap">Crea cursos desde un PDF</span>
+        <span class="cap">Mapea competencias automáticamente</span>
+        <span class="cap">Genera PIDs personalizados</span>
+        <span class="cap">Analiza encuestas con sentimiento</span>
+        <span class="cap">Redacta OKRs alineados al rol</span>
+      </div>
+    </div>
+    <div class="stage-ia">
+      <img class="lapzi-ia" src="../../assets/lapzi/lapzi-pointing.png" alt="Lapzi IA">
+      <div class="chat-bubble b1">
+        <div class="lbl">lapzo.IA</div>
+        Detecté que el equipo de Ventas tiene 3 brechas críticas. ¿Genero un plan de capacitación?
+      </div>
+      <div class="chat-bubble b2">
+        <strong>Sí, hazlo</strong> — y avísame cuando esté listo para revisar.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VERTICALS -->
+<section class="s verticals">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Hecho para tu sector</div>
+      <h2>Pixel-perfect para la realidad latinoamericana.</h2>
+      <p>NOM-035, DC3/DC4, IATF 16949, multi-sede, capacitación offline, sindicatos. No es una plantilla genérica de Silicon Valley.</p>
+    </div>
+    <div class="vbar">
+      <div class="v"><div class="cnt">14</div><div class="nm">Automotriz</div><div class="ex">Mazda, Ford, Hyundai</div></div>
+      <div class="v"><div class="cnt">22</div><div class="nm">Manufactura</div><div class="ex">Rotoplas, Femsa, Vitro</div></div>
+      <div class="v"><div class="cnt">9</div><div class="nm">Retail</div><div class="ex">Oxxo, Costco, Soriana</div></div>
+      <div class="v"><div class="cnt">6</div><div class="nm">Financiero</div><div class="ex">GBM, Dimex</div></div>
+      <div class="v"><div class="cnt">4</div><div class="nm">Farmacéutico</div><div class="ex">F. del Ahorro</div></div>
+      <div class="v"><div class="cnt">3</div><div class="nm">Hotelería</div><div class="ex">Grupo Posadas</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONA -->
+<section class="s personas">
+  <div class="wrap">
+    <div class="sec-head left">
+      <div class="eyebrow">Para cada perfil de RH</div>
+      <h2>Mismo producto, mensaje diferente.</h2>
+    </div>
+    <div class="tabs">
+      <div class="tab active">Andrea · Gerente de C&D</div>
+      <div class="tab">Pedro · Director de RH</div>
+      <div class="tab">Sofía · RH multi-rol</div>
+      <div class="tab">Santiago · CEO</div>
+      <div class="tab">Valentina · Líder</div>
+    </div>
+    <div class="panel">
+      <div>
+        <h3>Andrea, gerente de capacitación y desarrollo</h3>
+        <div class="quote">"Tu aliado estratégico para armar en pocos clicks planes de carrera personalizados que impulsarán el desarrollo de tus colaboradores."</div>
+        <ul>
+          <li>Crea cursos desde un PDF con Lapzo.IA — menos de 5 minutos</li>
+          <li>Rutas personalizadas automáticas según competencias</li>
+          <li>Reportes de avance y tasa de finalización al día</li>
+          <li>Cumple con DC3/DC4 sin diseñar nada desde cero</li>
+        </ul>
+        <a class="btn btn-primary" href="#" style="margin-top:8px">Ver demo para C&D →</a>
+      </div>
+      <div class="ph">
+        <div class="label">"Crea un curso<br>desde un PDF<br>en 5 minutos."</div>
+        <img class="lapzi" src="../../assets/lapzi/lapzi-motivated.png">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA strip -->
+<section class="cta-strip">
+  <div class="wrap">
+    <img class="deco" src="../../assets/decor/arrow-curve-violet.svg" alt="">
+    <h2>¿Listo para <em>transformar talento</em> en impacto medible?</h2>
+    <div class="actions">
+      <a class="btn btn-primary btn-lg" href="#">Agendar demo</a>
+      <a class="btn" href="#" style="background:transparent;border:1.5px solid #fff;color:#fff;padding:14px 28px">Calcula tu ROI →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <img src="../../assets/logo/lapzo-logo-on-dark.png" alt="lapzo">
+        <p>Aliado estratégico de las organizaciones latinoamericanas en el desarrollo de talento.</p>
+        <p style="font-size:12px;color:rgba(255,255,255,.4)">📍 Ciudad de México · Operamos en toda LATAM</p>
+      </div>
+      <div>
+        <h5>Producto</h5>
+        <ul>
+          <li><a href="#">Capacitación</a></li>
+          <li><a href="#">Competencias</a></li>
+          <li><a href="#">Evaluaciones</a></li>
+          <li><a href="#">OKRs</a></li>
+          <li><a href="#">TaaS</a></li>
+          <li><a href="#">lapzo.IA</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Compañía</h5>
+        <ul>
+          <li><a href="#">Sobre nosotros</a></li>
+          <li><a href="#">Casos de éxito</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Trabaja con nosotros</a></li>
+          <li><a href="#">Prensa</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Recursos</h5>
+        <ul>
+          <li><a href="#">Guías de RH</a></li>
+          <li><a href="#">Webinars</a></li>
+          <li><a href="#">Calculadora de ROI</a></li>
+          <li><a href="#">Política de datos</a></li>
+          <li><a href="#">Soporte · 5 min</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <div>© 2026 Lapzo. Hecho con ✦ en CDMX.</div>
+      <div class="partners">
+        <span>POWERED BY TECMILENIO</span>
+        <span>YCOMBINATOR W23</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Tabs (cosmetic switch)
+  document.querySelectorAll('.personas .tab').forEach(t => t.addEventListener('click', () => {
+    document.querySelectorAll('.personas .tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+  }));
+</script>
+
+</body>
+</html>

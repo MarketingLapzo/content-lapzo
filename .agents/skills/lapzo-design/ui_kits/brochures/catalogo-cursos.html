@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Catálogo lapzo — One Pager</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  :root { --page-w: 833px; --page-h: 1179px; --gutter: 50px; --display: 'Degular','Poppins',sans-serif; }
+  body { margin: 0; background: #E5E5EA; font-family: var(--font-body); color: #14142A; }
+  .pages { display: flex; flex-direction: column; align-items: center; gap: 28px; padding: 28px; }
+  .page { width: var(--page-w); height: var(--page-h); box-shadow: 0 10px 30px rgba(20,20,42,.10); position: relative; overflow: hidden; }
+
+  /* Hero peach */
+  .hero {
+    position: absolute; inset: 0 0 55% 0;
+    background: #FDE0C3;
+    padding: 0 var(--gutter);
+  }
+  .hero .logo { position: absolute; top: 38px; right: var(--gutter); height: 36px; }
+  .hero .pill {
+    position: absolute;
+    top: 50px; left: var(--gutter);
+    display: inline-flex; align-items: center; gap: 12px;
+    background: #fff;
+    border: 2px solid #F9912A;
+    border-radius: 9999px;
+    padding: 8px 8px 8px 8px;
+  }
+  .hero .pill .ic { width: 44px; height: 44px; border-radius: 50%; background: #FDE0C3; border: 2px solid #F9912A; display: flex; align-items: center; justify-content: center; }
+  .hero .pill .ic img { width: 22px; }
+  .hero .pill .lbl { font-family: var(--display); font-weight: 800; font-size: 24px; padding: 0 16px; color: #14142A; }
+  .hero .pill .addon { background: #8B55FE; color: #fff; padding: 6px 14px; border-radius: 9999px; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; }
+  .hero h1 {
+    position: absolute;
+    top: 170px; left: var(--gutter);
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 58px;
+    line-height: 1.0;
+    color: #14142A;
+    margin: 0;
+    letter-spacing: -0.022em;
+    max-width: 430px;
+  }
+  .hero .cta {
+    position: absolute;
+    left: var(--gutter); top: 360px;
+    display: inline-flex; align-items: center;
+    background: #8B55FE; color: #fff;
+    font-weight: 600; font-size: 16px;
+    padding: 14px 28px; border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 3px 3px 0 #14142A;
+  }
+  .hero .courses-stage {
+    position: absolute;
+    right: 30px; top: 130px;
+    width: 480px; height: 380px;
+  }
+  .hero .courses-stage .course {
+    position: absolute;
+    width: 130px; height: 200px;
+    border-radius: 14px;
+    background-size: cover;
+    background-color: #5029A3;
+    box-shadow: 0 12px 24px rgba(20,20,42,.18);
+  }
+  .hero .courses-stage .c1 { left: 0;   top: 30px; background: linear-gradient(180deg, #F9A6C4 0%, #F3538E 70%, #14142A 100%); }
+  .hero .courses-stage .c2 { left: 80;  top: 18px; background: linear-gradient(180deg, #4A5560 0%, #2A3340 70%, #14142A 100%); transform: rotate(-2deg); left: 60px; }
+  .hero .courses-stage .c3 { left: 130px; top: 30px; background: linear-gradient(180deg, #2A1B4E 0%, #14142A 100%); }
+  .hero .courses-stage .c4 { left: 200px; top: 18px; background: linear-gradient(180deg, #5029A3 0%, #14142A 100%); }
+  .hero .courses-stage .expanded {
+    position: absolute;
+    right: 0; top: 70px;
+    width: 240px;
+    background: linear-gradient(180deg, #C5A9FF 0%, #5029A3 40%, #14142A 100%);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 12px 24px rgba(20,20,42,.22);
+  }
+  .hero .courses-stage .expanded .video {
+    height: 130px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero .courses-stage .expanded .video .play {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,.3); display: flex; align-items: center; justify-content: center;
+  }
+  .hero .courses-stage .expanded .video .play::before {
+    content: '▶'; color: #fff; font-size: 16px; margin-left: 3px;
+  }
+  .hero .courses-stage .expanded .meta { padding: 6px 14px 0; color: #fff; }
+  .hero .courses-stage .expanded .meta .ttl { font-size: 11px; opacity: .9; }
+  .hero .courses-stage .expanded .meta .nm { font-family: var(--display); font-weight: 800; font-size: 16px; margin-bottom: 6px; }
+  .hero .courses-stage .expanded .meta .level { font-size: 10px; color: #54F4F2; font-weight: 600; margin-bottom: 10px; }
+  .hero .courses-stage .expanded .panel {
+    background: #14142A; padding: 10px 14px;
+  }
+  .hero .courses-stage .expanded .panel .lbl { font-size: 9.5px; color: #fff; font-weight: 600; margin-bottom: 8px; }
+  .hero .courses-stage .expanded .panel .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .hero .courses-stage .expanded .panel .chips span { font-size: 9px; padding: 4px 8px; border-radius: 9999px; background: rgba(255,255,255,.1); color: #fff; border: 1px solid rgba(255,255,255,.2); }
+
+  /* Decor */
+  .hero .decor-laptop {
+    position: absolute;
+    left: 70px; top: 380px;
+    width: 200px;
+    z-index: 1;
+  }
+  .hero .scribble {
+    position: absolute;
+    left: 0; bottom: -2px;
+    width: 280px;
+    opacity: .9;
+  }
+
+  /* Bottom — benefits */
+  .bottom {
+    position: absolute; inset: 45% 0 0 0;
+    background: #F7F7FC;
+    padding: 50px var(--gutter) 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 28px 32px;
+  }
+  .bottom .ben h3 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.25;
+    color: #14142A;
+    margin: 0 0 8px;
+  }
+  .bottom .ben p { font-size: 12.5px; line-height: 1.45; color: #14142A; margin: 0; }
+  .bottom .ben .micro {
+    margin-top: 14px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(20,20,42,.08);
+    padding: 12px;
+    font-size: 10px;
+  }
+  .bottom .ben .micro.chart {
+    text-align: center;
+  }
+  .bottom .ben .micro.chart .bars { display: flex; gap: 6px; align-items: flex-end; height: 60px; justify-content: center; margin: 10px 0; }
+  .bottom .ben .micro.chart .bars span { width: 16px; background: #8B55FE; border-radius: 2px; }
+  .bottom .ben .micro.chart .b1 { height: 38px; }
+  .bottom .ben .micro.chart .b2 { height: 46px; }
+  .bottom .ben .micro.chart .b3 { height: 28px; }
+  .bottom .ben .micro.chart .b4 { height: 50px; }
+  .bottom .ben .micro.chart .progress { background: #F7F7FC; border-radius: 8px; padding: 8px; margin-top: 8px; text-align: left; font-size: 9.5px; color: #14142A; }
+  .bottom .ben .micro.chart .progress strong { display: block; }
+  .bottom .ben .micro.ruta { padding: 14px; }
+  .bottom .ben .micro.ruta .ttl { font-weight: 700; font-size: 11px; color: #14142A; margin-bottom: 6px; }
+  .bottom .ben .micro.ruta .sub { color: #71717A; font-size: 10px; margin-bottom: 10px; }
+  .bottom .ben .micro.ruta .row { display: flex; align-items: center; gap: 6px; padding: 6px 0; border-top: 1px solid #F0F0F5; font-size: 10px; }
+  .bottom .ben .micro.ruta .row .num { width: 18px; height: 18px; border-radius: 50%; background: #F7F7FC; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 9px; color: #475569; }
+  .bottom .ben .micro.dc3 { background: #fff; padding: 14px; }
+  .bottom .ben .micro.dc3 .h { font-size: 9px; font-weight: 700; color: #14142A; margin-bottom: 6px; }
+  .bottom .ben .micro.dc3 .b { background: #F7F7FC; height: 22px; border-radius: 4px; margin-bottom: 8px; }
+  .bottom .ben .micro.dc3 .cta { background: #8B55FE; color: #fff; padding: 7px 12px; border-radius: 7px; font-weight: 700; font-size: 9px; display: inline-block; }
+
+  .bottom .footer-cta {
+    grid-column: 1 / -1;
+    text-align: right;
+    margin-top: 10px;
+  }
+  .bottom .footer-cta a {
+    background: #F9912A; color: #fff; font-weight: 600; font-size: 18px; padding: 16px 32px; border-radius: 9999px; text-decoration: none; box-shadow: 3px 3px 0 #14142A; display: inline-flex; align-items: center; gap: 10px;
+  }
+  .bottom .footer-cta a::after { content: '↗'; background: #fff; color: #F9912A; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; }
+
+  @page { size: A4 portrait; margin: 0; }
+  @media print { body { background: #fff; } .pages { padding: 0; gap: 0; } .page { width: 210mm; height: 297mm; box-shadow: none; } }
+</style>
+</head>
+<body>
+
+<div class="pages">
+  <article class="page">
+
+    <div class="hero">
+      <img class="logo" src="../../assets/logo/lapzo-logo.png" alt="lapzo">
+      <div class="pill">
+        <span class="ic"><img src="../../assets/modules/icon-training-orange.svg"></span>
+        <span class="lbl">Catálogo lapzo</span>
+        <span class="addon">+ ADD ON</span>
+      </div>
+
+      <h1>Diseña rutas de aprendizaje con la mejor calidad educativa</h1>
+
+      <div class="courses-stage">
+        <div class="course c1"></div>
+        <div class="course c2"></div>
+        <div class="course c3"></div>
+        <div class="course c4"></div>
+        <div class="expanded">
+          <div class="video"><div class="play"></div></div>
+          <div class="meta">
+            <div class="ttl">Academia de Liderazgo</div>
+            <div class="nm">Agilidad en el liderazgo</div>
+            <div class="level">▮▮▯ Nivel Intermedio</div>
+          </div>
+          <div class="panel">
+            <div class="lbl">Competencias</div>
+            <div class="chips">
+              <span>Formación y desarrollo de equipos</span>
+              <span>Inteligencia emocional</span>
+              <span>Liderazgo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a class="cta" href="#">Agenda tu demo</a>
+    </div>
+
+    <!-- BOTTOM BENEFITS -->
+    <div class="bottom">
+      <div class="ben">
+        <h3>Impulsa un aprendizaje basado en competencias</h3>
+        <p>Integra +800 cursos asociados a competencias para todos los niveles sobre Negocios, Liderazgo, Bienestar, Educación, Ingeniería y Softskills.</p>
+      </div>
+
+      <div class="ben">
+        <h3>Dimensiona el impacto de la capacitación</h3>
+        <p>Accede a reportes personalizables, en tiempo real de: usuarios que tomaron una lección, promedio de cursos finalizados por usuario y porcentaje de finalización de cursos.</p>
+        <div class="micro chart">
+          <div style="font-size:9px;font-weight:600;text-align:left;margin-bottom:4px">Gráfica general</div>
+          <div class="bars"><span class="b1"></span><span class="b2"></span><span class="b3"></span><span class="b4"></span></div>
+          <div class="progress">
+            <strong>Progreso general · 27%</strong>
+            <div style="height:4px;background:#EFF0F6;border-radius:9999px;margin-top:4px;overflow:hidden"><div style="width:27%;height:100%;background:#8B55FE"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ben">
+        <h3>Creados bajo la metodología Microlearning</h3>
+        <p>Nuestro equipo de diseño instruccional trabaja con "píldoras de aprendizaje" de no más de 30 minutos para ajustarse al intervalo de atención en el que el cerebro humano se mantiene concentrado e incluyen actividades dinámicas para fomentar el interés y la interacción con los usuarios.</p>
+      </div>
+
+      <div class="ben">
+        <h3>Descubre nuestras rutas de aprendizaje</h3>
+        <p>En cada una se agrupan 3 a 4 cursos de 30 minutos para lograr diferentes niveles de aprendizaje.</p>
+        <div class="micro ruta">
+          <div class="ttl">Ruta fundamentos de programación</div>
+          <div class="sub">Perfecciona tu habilidad en diseño gráfico.<br>📖 12 cursos · ⊿ Intermedio</div>
+          <div style="font-weight:700;font-size:9px;color:#14142A;margin-top:6px">CURSOS DE LA RUTA</div>
+          <div class="row"><div class="num">1</div>Pensamiento lógico: algoritmo y diagramas de flujo</div>
+          <div class="row"><div class="num">2</div>Pensamiento lógico: Manejo de datos, estructuras y funciones</div>
+        </div>
+      </div>
+
+      <div class="ben">
+        <h3>Lleva las capacitaciones a cualquier lugar</h3>
+        <p>Con nuestra app tus colaboradores pueden acceder a los cursos ¡incluso si están fuera de la oficina o sin acceso a internet!</p>
+      </div>
+
+      <div class="ben">
+        <h3>Cumple con las normativas y automatiza el seguimiento</h3>
+        <p>Reduce el trabajo operativo y alinea las capacitaciones que tu equipo realiza dentro de la plataforma con las normativas de la Secretaría de Trabajo de tu país.</p>
+        <div class="micro dc3">
+          <div class="h">FORMATO DC-3<br>Constancia de competencias o habilidades laborales</div>
+          <div class="b"></div>
+          <span class="cta">Generar reporte DC3</span>
+        </div>
+      </div>
+
+      <div class="footer-cta">
+        <a href="#">Ver catálogo de cursos</a>
+      </div>
+    </div>
+
+  </article>
+</div>
+
+</body>
+</html>

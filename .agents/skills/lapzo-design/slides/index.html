@@ -1,0 +1,1593 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Lapzo — Template de presentación (20 layouts)</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<script src="deck-stage.js"></script>
+<script type="application/json" id="speaker-notes">
+[
+  "01 Portada presentación. Logo arriba a la izquierda; bloque violeta en la esquina superior derecha; título grande blanco + bajada en Poppins; círculo violeta con foto + mockup del producto a la derecha.",
+  "02 Portada solo título. Versión minimalista de portada: solo título grande centrado sobre un pill violeta. Para anuncios o portadas de sub-sección.",
+  "03 Inicio · cover de foto. Foto a sangre con un borde negro alrededor. Para abrir secciones con peso visual.",
+  "04 Agenda. Pill header arriba a la izquierda, lista de 5 items numerados a la derecha — cada item con número, título y descripción.",
+  "05 Agenda índice. Versión más simple de la agenda — sin descripciones, solo los títulos numerados.",
+  "06 Carátula separadora. Slide entre secciones. Número grande centrado + nombre de la sección.",
+  "07 Saludo. Slide de saludo/intro de persona o equipo. Foto + nombre + rol.",
+  "08 Saludo final · ¡Gracias!. Cierre con título gigante centrado + URL.",
+  "09 Big Number. 4 datos clave conectados por una curva. Cada dato lleva el nombre del cliente.",
+  "10 Título + texto + mockup. Texto a la izquierda, mockup del producto a la derecha en card violeta con borde + sombra dura.",
+  "11 Slide con bullets. 5 puntos numerados con icono circular oscuro a la izquierda.",
+  "12 Slide con cajas. 4 cajas con número + título corto + descripción.",
+  "13 Slide con flujos. Diagrama de proceso paso a paso con flechas.",
+  "14 Slide con imagen. Texto a la izquierda + imagen grande a la derecha con esquinas redondeadas.",
+  "15 Categoría + bullets. Título grande en violeta (categoría) + bajada + 5 bullets numerados en cards blancas.",
+  "16 Categoría + copy + texto. Título violeta + 2-3 párrafos de cuerpo. Para slides densas de texto.",
+  "17 Título + tabla comparativa. Pill header + tabla de 3 columnas con varias filas y números.",
+  "18 Título + tabla doble entrada. Título violeta + matriz 3×3 de opciones.",
+  "19 Texto + opciones en cajas. 4 cajas blancas sobre una banda violeta semi-transparente en el bottom.",
+  "20 Quote / cita. Cita grande en violeta brillante sobre fondo oscuro + atribución."
+]
+</script>
+<style>
+  body { margin: 0; background: #0a0a1a; }
+  deck-stage { display: block; }
+
+  /* ───────────────────────────────────────────────
+     SLIDE BASE — fixed 1920×1080, common patterns
+     ─────────────────────────────────────────────── */
+  section {
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-body);
+    color: #14142A;
+  }
+  section.bg-light { background: #F7F7FC; }
+  section.bg-dark  { background: #14142A; color: #fff; }
+  section.bg-white { background: #fff; }
+
+  /* Logo — lapzo official PNG */
+  .logo-tr { position: absolute; top: 60px; right: 75px; height: 62px; z-index: 5; }
+  .logo-tl { position: absolute; top: 76px; left: 122px; height: 78px; z-index: 5; }
+  .logo-br { position: absolute; bottom: 60px; right: 75px; height: 62px; z-index: 5; }
+
+  /* Slide number */
+  .slide-num {
+    position: absolute;
+    bottom: 28px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    color: rgba(20,20,42,.35);
+    font-weight: 500;
+    letter-spacing: .04em;
+    z-index: 4;
+  }
+  .bg-dark .slide-num { color: rgba(255,255,255,.4); }
+
+  /* Pill header — violet pill with dark circle icon + title */
+  .pill {
+    position: absolute;
+    top: 65px; left: 79px;
+    height: 100px;
+    background: #8B55FE;
+    border-radius: 82px;
+    display: flex;
+    align-items: center;
+    padding: 0 60px 0 11px;
+    gap: 22px;
+    z-index: 4;
+  }
+  .pill .ico {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: #14142A;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .pill .ico svg { width: 38px; height: 32px; }
+  .pill .label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 46px;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+  .pill-teal { background: #04949D; }
+  .pill-pink { background: #F3538E; }
+  .pill-orange { background: #F9912A; }
+
+  /* Big category title (Degular Bold replacement) */
+  .cat-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 100px;
+    color: #8B55FE;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+
+  /* Standard body text */
+  .body-lg {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 35px;
+    color: #14142A;
+    line-height: 1.4;
+  }
+  .body-lg em { font-style: italic; color: #8B55FE; font-weight: 500; }
+
+  /* Eyebrow */
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #8B55FE;
+  }
+  .bg-dark .eyebrow { color: #A685FF; }
+
+
+  /* ═══════════════════════════════════════════════
+     01 — PORTADA PRESENTACIÓN
+     ═══════════════════════════════════════════════ */
+  .s01 .corner-block {
+    position: absolute; top: 0; right: 0;
+    width: 168px; height: 196px;
+    background: #8B55FE;
+  }
+  .s01 .underline-deco {
+    position: absolute; top: 615px; left: 122px;
+    width: 224px; height: 16px;
+    background: #8B55FE;
+    transform: rotate(3.5deg);
+    border-radius: 2px;
+  }
+  .s01 .title {
+    position: absolute; left: 121px; top: 344px;
+    width: 700px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 96px;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: #fff;
+    text-wrap: balance;
+    margin: 0;
+  }
+  .s01 .lede {
+    position: absolute; left: 122px; top: 670px;
+    width: 638px;
+    font-family: var(--font-body);
+    font-size: 32px;
+    line-height: 1.35;
+    color: #fff;
+    opacity: .9;
+    margin: 0;
+  }
+  .s01 .stage {
+    position: absolute;
+    right: -100px; top: 80px;
+    width: 1080px; height: 1000px;
+  }
+  .s01 .stage .photo-circle {
+    position: absolute;
+    left: 280px; top: 60px;
+    width: 580px; height: 580px;
+    border-radius: 50%;
+    background: linear-gradient(160deg, #5029A3 0%, #9D6FFF 100%);
+    overflow: hidden;
+  }
+  .s01 .stage .photo-circle::before {
+    content: ''; position: absolute; inset: 0;
+    background: url('../assets/lapzi/lapzi-yougotthis.png') center / contain no-repeat;
+    opacity: .9;
+  }
+  .s01 .stage .orbit {
+    position: absolute;
+    left: 240px; top: 30px;
+    width: 660px; height: 660px;
+    border: 2.5px solid #8B55FE;
+    border-radius: 50%;
+    transform: rotate(-30deg);
+  }
+  .s01 .stage .mockup {
+    position: absolute;
+    left: 70px; top: 420px;
+    width: 340px;
+    border-radius: 16px;
+    background: #fff;
+    border: 1.2px solid #DBDDE6;
+    box-shadow: 5px 5px 0 #8B55FE;
+    overflow: hidden;
+  }
+  .s01 .stage .mockup img { width: 100%; display: block; }
+  .s01 .stage .check-card {
+    position: absolute;
+    left: 470px; top: 660px;
+    width: 230px;
+    background: #fff;
+    border-radius: 14px;
+    border: 0.5px solid #DBDDE6;
+    box-shadow: 0 8px 18px rgba(0,0,0,.18);
+    padding: 18px;
+    text-align: center;
+  }
+  .s01 .stage .check-card .h {
+    font-weight: 700; font-size: 20px; color: #262338;
+    margin-bottom: 6px;
+  }
+  .s01 .stage .check-card .b {
+    font-weight: 600; font-size: 11px; color: #262338;
+    line-height: 1.4;
+  }
+  .s01 .stage .check-card .actions {
+    display: flex; gap: 8px; margin-top: 12px;
+    padding-top: 12px; border-top: 1px solid #E2E2E8;
+    justify-content: center;
+  }
+  .s01 .stage .check-card .b1 {
+    flex: 1; padding: 5px 8px;
+    background: #fff; border: 1px solid #E2E2E8;
+    border-radius: 6px; font-size: 9px; color: #262338;
+  }
+  .s01 .stage .check-card .b2 {
+    flex: 1; padding: 5px 8px;
+    background: #8B55FE; border: none; color: #fff;
+    border-radius: 6px; font-size: 9px;
+  }
+  .s01 .stage .arrow-circle {
+    position: absolute;
+    left: 740px; top: 645px;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: #8B55FE;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 24px;
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     02 — PORTADA SOLO TÍTULO
+     ═══════════════════════════════════════════════ */
+  .s02 .left-tape {
+    position: absolute;
+    left: 0; top: 42px;
+    width: 270px; height: 500px;
+    background: #D9D9D9;
+    overflow: hidden;
+  }
+  .s02 .left-tape::after {
+    content: '✱';
+    position: absolute;
+    left: -250px; top: 0;
+    font-size: 500px;
+    color: #8B55FE;
+    line-height: 1;
+    font-family: serif;
+  }
+  .s02 .corner-star {
+    position: absolute;
+    right: 90px; bottom: 80px;
+    width: 208px; height: 208px;
+    color: #8B55FE;
+    font-size: 220px;
+    font-family: serif;
+    line-height: 1;
+  }
+  .s02 .title-bg {
+    position: absolute;
+    left: 50%; top: 380px;
+    transform: translateX(-50%) rotate(-3.5deg);
+    width: 580px; height: 124px;
+    border-radius: 79px;
+    background: #8B55FE;
+  }
+  .s02 .title {
+    position: absolute;
+    left: 0; right: 0;
+    top: 324px;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 108px;
+    line-height: 1.02;
+    color: #fff;
+    margin: 0;
+    padding: 0 200px;
+  }
+  .s02 .arrow-deco {
+    position: absolute;
+    left: 50%; top: 580px;
+    transform: translateX(-50%);
+    width: 290px; height: 63px;
+  }
+  .s02 .arrow-deco svg { width: 100%; height: 100%; fill: #8B55FE; }
+  .s02 .sub {
+    position: absolute;
+    left: 0; right: 0; top: 600px;
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 42px;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     03 — INICIO (foto a sangre)
+     ═══════════════════════════════════════════════ */
+  .s03 .photo {
+    position: absolute;
+    left: 86px; top: 38px;
+    width: 1748px; height: 1004px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #5029A3 30%, #C3B1FF 100%);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .s03 .photo::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 40%, rgba(255,255,255,.2) 0%, transparent 60%);
+  }
+  .s03 .photo-caption {
+    position: relative;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 110px;
+    color: #fff;
+    text-align: center;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+    max-width: 1100px;
+    margin: 0;
+  }
+  .s03 .photo-caption em {
+    font-style: italic; color: #54F4F2;
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     04 — AGENDA
+     ═══════════════════════════════════════════════ */
+  .s04 .list {
+    position: absolute;
+    left: 79px; top: 250px;
+    right: 79px;
+    display: flex; flex-direction: column;
+    gap: 18px;
+  }
+  .s04 .item {
+    background: #fff;
+    border: 1.5px solid #14142A;
+    border-radius: 24px;
+    box-shadow: 4px 4px 0 #14142A;
+    padding: 26px 36px;
+    display: grid;
+    grid-template-columns: 72px 400px 1fr;
+    align-items: center;
+    gap: 36px;
+  }
+  .s04 .item .n {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: #14142A;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 32px;
+  }
+  .s04 .item .t {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 34px;
+    color: #14142A;
+    line-height: 1.1;
+  }
+  .s04 .item .d {
+    font-size: 22px;
+    color: #475569;
+    line-height: 1.35;
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     05 — AGENDA ÍNDICE
+     ═══════════════════════════════════════════════ */
+  .s05 .list {
+    position: absolute;
+    left: 79px; top: 280px;
+    right: 79px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 80px;
+    row-gap: 14px;
+  }
+  .s05 .row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    align-items: center;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 2px solid #14142A;
+  }
+  .s05 .row .n {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 56px;
+    color: #8B55FE;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .s05 .row .t {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 36px;
+    color: #14142A;
+    line-height: 1.2;
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     06 — CARÁTULA SEPARADORA
+     ═══════════════════════════════════════════════ */
+  .s06 {
+    display: flex; align-items: center; justify-content: center;
+  }
+  .s06 .glow {
+    position: absolute;
+    width: 1000px; height: 1000px;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(125,49,246,.35) 0%, transparent 65%);
+  }
+  .s06 .num {
+    position: absolute;
+    top: 240px; left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 260px;
+    color: rgba(195,177,255,.45);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .s06 .title {
+    position: absolute;
+    top: 580px; left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 100px;
+    color: #fff;
+    text-align: center;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0;
+    max-width: 1500px;
+  }
+  .s06 .title em { font-style: italic; color: #54F4F2; }
+  .s06 .sub {
+    position: absolute;
+    top: 800px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+    color: rgba(255,255,255,.75);
+    text-align: center;
+    max-width: 1100px;
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     07 — SALUDO
+     ═══════════════════════════════════════════════ */
+  .s07 .photo-frame {
+    position: absolute;
+    left: 79px; top: 50%;
+    transform: translateY(-50%);
+    width: 660px; height: 800px;
+    border-radius: 32px;
+    background: linear-gradient(135deg, #DDD4FF 0%, #ECE8FF 100%);
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .s07 .photo-frame .lapzi {
+    width: 480px;
+  }
+  .s07 .arrow-deco {
+    position: absolute;
+    left: 700px; top: 220px;
+    width: 200px; height: 80px;
+    color: #8B55FE;
+  }
+  .s07 .right-col {
+    position: absolute;
+    left: 820px; top: 50%;
+    transform: translateY(-50%);
+    width: 1020px;
+  }
+  .s07 .role-tag {
+    display: inline-flex;
+    background: #8B55FE;
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .s07 .name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 110px;
+    color: #14142A;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin: 0 0 30px;
+  }
+  .s07 .name em {
+    font-style: italic; color: #8B55FE;
+  }
+  .s07 .bio {
+    font-family: var(--font-body);
+    font-size: 30px;
+    color: #475569;
+    line-height: 1.4;
+    margin: 0;
+    max-width: 880px;
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     08 — SALUDO FINAL (¡Gracias!)
+     ═══════════════════════════════════════════════ */
+  .s08 .left-tape {
+    position: absolute;
+    left: 0; top: 42px;
+    width: 270px; height: 500px;
+    background: #D9D9D9;
+    overflow: hidden;
+  }
+  .s08 .left-tape::after {
+    content: '✱';
+    position: absolute;
+    left: -250px; top: 0;
+    font-size: 500px;
+    color: #8B55FE;
+    line-height: 1;
+    font-family: serif;
+  }
+  .s08 .corner-star {
+    position: absolute;
+    right: 90px; bottom: 80px;
+    width: 208px; height: 208px;
+    color: #8B55FE;
+    font-size: 220px;
+    line-height: 1;
+    font-family: serif;
+  }
+  .s08 .thanks {
+    position: absolute;
+    left: 0; right: 0; top: 320px;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 260px;
+    color: #fff;
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    margin: 0;
+  }
+  .s08 .url {
+    position: absolute;
+    left: 0; right: 0; top: 950px;
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 42px;
+    color: #A685FF;
+    line-height: 1;
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     09 — BIG NUMBER (4 stats with curve)
+     ═══════════════════════════════════════════════ */
+  .s09 h2 {
+    position: absolute;
+    top: 130px; left: 79px; right: 79px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 1.1;
+    color: #14142A;
+    margin: 0;
+    text-align: center;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .s09 h2 em { font-style: italic; color: #8B55FE; font-weight: 700; }
+  .s09 .wave {
+    position: absolute;
+    top: 530px; left: 0; right: 0;
+    height: 240px;
+    pointer-events: none;
+  }
+  .s09 .cards {
+    position: absolute;
+    top: 320px; left: 0; right: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0 80px;
+    gap: 36px;
+  }
+  .s09 .card {
+    background: #fff;
+    border-radius: 32px;
+    border: 1.5px solid #14142A;
+    box-shadow: 6px 6px 0 #14142A;
+    padding: 36px 26px;
+    text-align: center;
+    aspect-ratio: 1;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+  }
+  .s09 .card:nth-child(1) { margin-top: 100px; }
+  .s09 .card:nth-child(2) { margin-top: 30px; }
+  .s09 .card:nth-child(3) { margin-top: 90px; }
+  .s09 .card:nth-child(4) { margin-top: 0; }
+  .s09 .card .num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 88px;
+    color: #14142A;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+  }
+  .s09 .card .lbl {
+    font-size: 22px;
+    color: #14142A;
+    line-height: 1.3;
+    font-weight: 500;
+  }
+  .s09 .card .lbl b { color: #8B55FE; }
+
+
+  /* ═══════════════════════════════════════════════
+     10 — TÍTULO + TEXTO + MOCKUP
+     ═══════════════════════════════════════════════ */
+  .s10 .body {
+    position: absolute;
+    left: 129px; top: 325px;
+    width: 720px;
+  }
+  .s10 .mockup-frame {
+    position: absolute;
+    right: 79px; top: 132px;
+    width: 600px; height: 636px;
+    border-radius: 33px;
+    background: #DED0FE;
+    border: 1.5px solid #14142A;
+    box-shadow: 5px 5px 0 #14142A;
+    overflow: hidden;
+    padding: 70px 26px 26px;
+  }
+  .s10 .mockup-frame::before {
+    content: '× × +';
+    position: absolute;
+    top: 28px; right: 28px;
+    color: #14142A;
+    font-size: 20px;
+    letter-spacing: 8px;
+    font-weight: 600;
+  }
+  .s10 .mockup-inner {
+    background: #fff;
+    border-radius: 22px;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .s10 .mockup-inner img {
+    width: 90%;
+    border-radius: 16px;
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     11 — SLIDE CON BULLETS
+     ═══════════════════════════════════════════════ */
+  .s11 .bullets {
+    position: absolute;
+    left: 79px; top: 280px;
+    right: 79px;
+    display: flex; flex-direction: column;
+    gap: 22px;
+  }
+  .s11 .bullet {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    align-items: center;
+    gap: 28px;
+  }
+  .s11 .bullet .n {
+    width: 88px; height: 88px;
+    border-radius: 50%;
+    background: #14142A;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 38px;
+  }
+  .s11 .bullet .card {
+    background: #fff;
+    border: 1.5px solid #14142A;
+    border-radius: 22px;
+    box-shadow: 3px 3px 0 #14142A;
+    padding: 22px 36px;
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+  .s11 .bullet .card .h {
+    font-weight: 700;
+    font-size: 30px;
+    color: #14142A;
+    line-height: 1.1;
+  }
+  .s11 .bullet .card .d {
+    font-size: 22px;
+    color: #475569;
+    line-height: 1.4;
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     12 — SLIDE CON CAJAS
+     ═══════════════════════════════════════════════ */
+  .s12 .grid {
+    position: absolute;
+    left: 79px; top: 320px;
+    right: 79px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .s12 .box {
+    background: #fff;
+    border: 1.5px solid #14142A;
+    border-radius: 24px;
+    box-shadow: 4px 4px 0 #14142A;
+    padding: 30px 26px;
+    min-height: 480px;
+    display: flex; flex-direction: column;
+    gap: 16px;
+  }
+  .s12 .box .n {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: #14142A;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 28px;
+  }
+  .s12 .box .h {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 32px;
+    color: #14142A;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  .s12 .box .d {
+    font-size: 20px;
+    color: #475569;
+    line-height: 1.4;
+    margin-top: auto;
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     13 — SLIDE CON FLUJOS (proceso)
+     ═══════════════════════════════════════════════ */
+  .s13 .flow {
+    position: absolute;
+    left: 79px; top: 360px;
+    right: 79px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    align-items: center;
+  }
+  .s13 .flow .step {
+    background: #fff;
+    border: 1.5px solid #14142A;
+    border-radius: 24px;
+    box-shadow: 3px 3px 0 #14142A;
+    padding: 28px 18px;
+    text-align: center;
+  }
+  .s13 .flow .step .n {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: #8B55FE;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 24px;
+    margin: 0 auto 14px;
+  }
+  .s13 .flow .step .h {
+    font-weight: 700; font-size: 22px;
+    color: #14142A;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .s13 .flow .step .d {
+    font-size: 14px;
+    color: #475569;
+    line-height: 1.35;
+  }
+  .s13 .flow .arr {
+    color: #14142A;
+    font-size: 42px;
+    text-align: center;
+    font-weight: 300;
+    line-height: 1;
+  }
+  .s13 .lede {
+    position: absolute;
+    left: 79px; top: 230px;
+    right: 79px;
+    font-size: 28px;
+    color: #475569;
+    text-align: center;
+    line-height: 1.4;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     14 — SLIDE CON IMAGEN
+     ═══════════════════════════════════════════════ */
+  .s14 .body {
+    position: absolute;
+    left: 129px; top: 320px;
+    width: 720px;
+  }
+  .s14 .image {
+    position: absolute;
+    right: 79px; top: 220px;
+    width: 980px; height: 700px;
+    border-radius: 28px;
+    background: linear-gradient(135deg, #8B55FE 0%, #C3B1FF 100%);
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(20,20,42,.15);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .s14 .image::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.3) 0%, transparent 60%);
+  }
+  .s14 .image .lapzi {
+    width: 60%;
+    z-index: 2;
+    position: relative;
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     15 — CATEGORÍA + BULLETS
+     ═══════════════════════════════════════════════ */
+  .s15 .cat {
+    position: absolute;
+    left: 68px; top: 104px;
+    width: 800px;
+  }
+  .s15 .cat h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 96px;
+    color: #8B55FE;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin: 0 0 20px;
+  }
+  .s15 .cat .sub {
+    font-family: var(--font-body);
+    font-size: 32px;
+    line-height: 1.3;
+    color: #14142A;
+    max-width: 1100px;
+  }
+  .s15 .list {
+    position: absolute;
+    left: 79px; right: 79px; top: 480px;
+    display: flex; flex-direction: column;
+    gap: 16px;
+  }
+  .s15 .list .row {
+    background: #fff;
+    border: 1.5px solid #14142A;
+    border-radius: 28px;
+    box-shadow: 3px 3px 0 #14142A;
+    padding: 22px 36px;
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 28px;
+    align-items: center;
+  }
+  .s15 .list .n {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 36px;
+    color: #8B55FE;
+    line-height: 1;
+  }
+  .s15 .list .t {
+    font-size: 26px;
+    color: #14142A;
+    line-height: 1.3;
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     16 — CATEGORÍA + COPY + TEXTO
+     ═══════════════════════════════════════════════ */
+  .s16 .cat {
+    position: absolute;
+    left: 68px; top: 104px;
+  }
+  .s16 .cat h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 96px;
+    color: #8B55FE;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+  .s16 .body {
+    position: absolute;
+    left: 79px; right: 79px; top: 320px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+  .s16 .body .col p {
+    font-size: 28px;
+    line-height: 1.45;
+    color: #14142A;
+    margin: 0 0 24px;
+  }
+  .s16 .body .col p:last-child { margin-bottom: 0; }
+  .s16 .body .col p em {
+    font-style: italic; color: #8B55FE; font-weight: 500;
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     17 — TÍTULO + TABLA COMPARATIVA
+     ═══════════════════════════════════════════════ */
+  .s17 .table {
+    position: absolute;
+    left: 79px; right: 79px; top: 280px;
+    border-radius: 24px;
+    background: #fff;
+    border: 1.5px solid #14142A;
+    box-shadow: 5px 5px 0 #14142A;
+    overflow: hidden;
+  }
+  .s17 .table .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-bottom: 1.5px solid #14142A;
+  }
+  .s17 .table .row:last-child { border-bottom: 0; }
+  .s17 .table .cell {
+    padding: 26px 32px;
+    border-right: 1.5px solid #14142A;
+    font-size: 22px;
+    color: #14142A;
+    line-height: 1.35;
+  }
+  .s17 .table .cell:last-child { border-right: 0; }
+  .s17 .table .head {
+    background: #14142A;
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 28px;
+    padding: 24px 32px;
+  }
+  .s17 .table .head .n {
+    display: inline-flex;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: #8B55FE;
+    color: #fff;
+    align-items: center; justify-content: center;
+    margin-right: 12px;
+    font-size: 18px;
+  }
+  .s17 .table .row:nth-child(odd) .cell:not(.head) { background: #FBFAFE; }
+
+
+  /* ═══════════════════════════════════════════════
+     18 — TÍTULO + TABLA DOBLE ENTRADA
+     ═══════════════════════════════════════════════ */
+  .s18 .title {
+    position: absolute;
+    left: 86px; top: 70px;
+  }
+  .s18 .title h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 96px;
+    color: #8B55FE;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+  .s18 .matrix {
+    position: absolute;
+    left: 79px; right: 79px; top: 290px;
+    display: grid;
+    grid-template-columns: 240px repeat(3, 1fr);
+    gap: 16px;
+  }
+  .s18 .matrix .cell {
+    background: #fff;
+    border: 1.5px solid #14142A;
+    border-radius: 18px;
+    box-shadow: 3px 3px 0 #14142A;
+    padding: 22px;
+    min-height: 130px;
+    font-size: 20px;
+    color: #14142A;
+    line-height: 1.35;
+    display: flex; align-items: center;
+  }
+  .s18 .matrix .label-row {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: #8B55FE;
+    font-size: 28px;
+    justify-content: flex-start;
+  }
+  .s18 .matrix .label-col {
+    background: #14142A;
+    color: #fff;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 28px;
+    justify-content: center;
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     19 — TEXTO + OPCIONES EN CAJAS
+     ═══════════════════════════════════════════════ */
+  .s19 .lavanda-band {
+    position: absolute;
+    left: -50px; bottom: -100px;
+    width: 2020px;
+    height: 540px;
+    background: rgba(218,200,255,0.6);
+    border-radius: 80px 80px 0 0;
+  }
+  .s19 .options {
+    position: absolute;
+    left: 79px; right: 79px; top: 360px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  .s19 .opt {
+    background: #fff;
+    border: 1.5px solid #14142A;
+    border-radius: 24px;
+    box-shadow: 5px 5px 0 #14142A;
+    padding: 32px 30px;
+    min-height: 460px;
+    display: flex; flex-direction: column;
+    gap: 16px;
+    position: relative;
+  }
+  .s19 .opt .n {
+    position: absolute;
+    top: -28px; left: 30px;
+    background: #8B55FE;
+    color: #fff;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 24px;
+    border: 1.5px solid #14142A;
+  }
+  .s19 .opt .h {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 34px;
+    color: #14142A;
+    line-height: 1.05;
+    margin-top: 24px;
+  }
+  .s19 .opt .d {
+    font-size: 22px;
+    color: #475569;
+    line-height: 1.4;
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     20 — QUOTE / CITA
+     ═══════════════════════════════════════════════ */
+  .s20 .quote-mark {
+    position: absolute;
+    top: 180px; left: 79px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 280px;
+    color: #8B55FE;
+    line-height: 0.8;
+    opacity: .6;
+  }
+  .s20 .quote {
+    position: absolute;
+    left: 79px; right: 79px; top: 360px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 92px;
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    max-width: 1500px;
+    margin: 0;
+  }
+  .s20 .quote em {
+    color: #54F4F2; font-style: italic;
+  }
+  .s20 .attribution {
+    position: absolute;
+    left: 79px; bottom: 120px;
+    display: flex; align-items: center; gap: 24px;
+  }
+  .s20 .attribution .who {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 32px;
+    color: #A685FF;
+  }
+  .s20 .attribution .div {
+    width: 1px; height: 36px;
+    background: rgba(255,255,255,.2);
+  }
+  .s20 .attribution .role {
+    font-size: 22px;
+    color: rgba(255,255,255,.6);
+  }
+</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- ════ 01 PORTADA PRESENTACIÓN ════ -->
+  <section class="bg-dark s01" data-screen-label="01 Portada">
+    <div class="corner-block"></div>
+    <img class="logo-tl" src="../assets/logo/lapzo-logo-on-dark.png" alt="lapzo" style="height:78px;">
+    <div class="underline-deco"></div>
+
+    <h1 class="title">Transformamos talento en acción.</h1>
+    <p class="lede">Lorem ipsum dolor sit amet consectetur. Purus id rhoncus accumsan felis. Adipiscing id mauris in sed platea cras.</p>
+
+    <div class="stage">
+      <div class="orbit"></div>
+      <div class="photo-circle"></div>
+      <div class="mockup"><img src="../assets/ui-shots/team-table.png" alt=""></div>
+      <div class="check-card">
+        <div class="h">¡Excelente!</div>
+        <div class="b">Has creado exitosamente<br>el contenido de tu curso</div>
+        <div class="actions">
+          <button class="b1">Mis cursos</button>
+          <button class="b2">Gestionar</button>
+        </div>
+      </div>
+      <div class="arrow-circle">→</div>
+    </div>
+
+    <div class="slide-num">01 / 20</div>
+  </section>
+
+
+  <!-- ════ 02 PORTADA SOLO TÍTULO ════ -->
+  <section class="bg-dark s02" data-screen-label="02 Portada solo título">
+    <div class="left-tape"></div>
+    <img class="logo-tr" src="../assets/logo/lapzo-logo-on-dark.png" alt="lapzo">
+
+    <div class="title-bg"></div>
+    <h1 class="title">Lorem ipsum dolor<br>sit amet</h1>
+    <p class="sub">Lorem ipsum dolor sit amet consectetur</p>
+
+    <div class="corner-star">✱</div>
+    <div class="slide-num">02 / 20</div>
+  </section>
+
+
+  <!-- ════ 03 INICIO · FOTO A SANGRE ════ -->
+  <section class="bg-dark s03" data-screen-label="03 Inicio · foto">
+    <div class="photo">
+      <h1 class="photo-caption">Cover con <em>foto a sangre</em><br>y bordes redondeados</h1>
+    </div>
+    <div class="slide-num" style="color:rgba(255,255,255,.5);">03 / 20</div>
+  </section>
+
+
+  <!-- ════ 04 AGENDA ════ -->
+  <section class="bg-light s04" data-screen-label="04 Agenda">
+    <img class="logo-tr" src="../assets/logo/lapzo-logo.png" alt="lapzo">
+    <div class="pill">
+      <div class="ico"><svg viewBox="0 0 42 37" fill="#A685FF"><rect x="0" y="16" width="32" height="5" rx="1"/><path d="M 20.5 0 L 41 18.5 L 20.5 37 L 17 33.5 L 33 18.5 L 17 3.5 Z"/></svg></div>
+      <div class="label">Agenda</div>
+    </div>
+
+    <div class="list">
+      <div class="item"><div class="n">1</div><div class="t">¿Quiénes somos?</div><div class="d">Lorem ipsum dolor sit amet consectetur — un párrafo breve por punto.</div></div>
+      <div class="item"><div class="n">2</div><div class="t">El problema</div><div class="d">Lorem ipsum dolor sit amet consectetur — un párrafo breve por punto.</div></div>
+      <div class="item"><div class="n">3</div><div class="t">Producto y módulos</div><div class="d">Lorem ipsum dolor sit amet consectetur — un párrafo breve por punto.</div></div>
+      <div class="item"><div class="n">4</div><div class="t">Casos de éxito</div><div class="d">Lorem ipsum dolor sit amet consectetur — un párrafo breve por punto.</div></div>
+      <div class="item"><div class="n">5</div><div class="t">Próximos pasos</div><div class="d">Lorem ipsum dolor sit amet consectetur — un párrafo breve por punto.</div></div>
+    </div>
+    <div class="slide-num">04 / 20</div>
+  </section>
+
+
+  <!-- ════ 05 AGENDA ÍNDICE ════ -->
+  <section class="bg-light s05" data-screen-label="05 Agenda índice">
+    <img class="logo-tr" src="../assets/logo/lapzo-logo.png" alt="lapzo">
+    <div class="pill">
+      <div class="ico"><svg viewBox="0 0 42 37" fill="#A685FF"><rect x="0" y="16" width="32" height="5" rx="1"/><path d="M 20.5 0 L 41 18.5 L 20.5 37 L 17 33.5 L 33 18.5 L 17 3.5 Z"/></svg></div>
+      <div class="label">Agenda</div>
+    </div>
+
+    <div class="list">
+      <div class="row"><div class="n">01</div><div class="t">Lorem ipsum dolor sit</div></div>
+      <div class="row"><div class="n">02</div><div class="t">Consectetur adipiscing</div></div>
+      <div class="row"><div class="n">03</div><div class="t">Ut labore et dolore</div></div>
+      <div class="row"><div class="n">04</div><div class="t">Magna aliqua</div></div>
+      <div class="row"><div class="n">05</div><div class="t">Quis nostrud</div></div>
+      <div class="row"><div class="n">06</div><div class="t">Exercitation ullamco</div></div>
+    </div>
+    <div class="slide-num">05 / 20</div>
+  </section>
+
+
+  <!-- ════ 06 CARÁTULA SEPARADORA ════ -->
+  <section class="bg-dark s06" data-screen-label="06 Separador">
+    <div class="glow"></div>
+    <img class="logo-tr" src="../assets/logo/lapzo-logo-on-dark.png" alt="lapzo">
+
+    <div class="num">03</div>
+    <h2 class="title">Producto y <em>módulos</em></h2>
+    <p class="sub">Todo el ciclo de talento en una sola plataforma, cocreada con expertos de RH.</p>
+    <div class="slide-num">06 / 20</div>
+  </section>
+
+
+  <!-- ════ 07 SALUDO ════ -->
+  <section class="bg-light s07" data-screen-label="07 Saludo · persona">
+    <img class="logo-tr" src="../assets/logo/lapzo-logo.png" alt="lapzo">
+
+    <div class="photo-frame">
+      <img class="lapzi" src="../assets/lapzi/lapzi-pointing.png" alt="">
+    </div>
+
+    <div class="right-col">
+      <div class="role-tag">Customer Success · Lapzo</div>
+      <h2 class="name">Hola, soy <em>María José</em>.</h2>
+      <p class="bio">Lorem ipsum dolor sit amet consectetur. Mus porttitor at sed arcu nunc faucibus dui quam. Condimentum consectetur ullamcorper consectetur lectus sit vitae duis volutpat in.</p>
+    </div>
+    <div class="slide-num">07 / 20</div>
+  </section>
+
+
+  <!-- ════ 08 SALUDO FINAL ════ -->
+  <section class="bg-dark s08" data-screen-label="08 Saludo final">
+    <div class="left-tape"></div>
+    <img class="logo-tr" src="../assets/logo/lapzo-logo-on-dark.png" alt="lapzo">
+    <div class="corner-star">✱</div>
+
+    <h1 class="thanks">¡Gracias!</h1>
+    <p class="url">www.lapzo.com</p>
+    <div class="slide-num">08 / 20</div>
+  </section>
+
+
+  <!-- ════ 09 BIG NUMBER ════ -->
+  <section class="bg-light s09" data-screen-label="09 Big Numbers">
+    <img class="logo-tr" src="../assets/logo/lapzo-logo.png" alt="lapzo">
+    <h2>Datos <em>reales</em> de clientes que ya transformaron su talento en acción.</h2>
+
+    <svg class="wave" viewBox="0 0 1920 240" preserveAspectRatio="none" fill="none">
+      <path d="M 80 200 Q 380 50 660 180 T 1260 100 T 1840 220" stroke="url(#g)" stroke-width="3" stroke-dasharray="6 10" stroke-linecap="round"/>
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#F3538E"/><stop offset="60%" stop-color="#8B55FE"/><stop offset="100%" stop-color="#04949D"/>
+      </linearGradient></defs>
+    </svg>
+
+    <div class="cards">
+      <div class="card"><div class="num">+63K</div><div class="lbl">cursos terminados<br>en 12 meses<br><b>Mazda</b></div></div>
+      <div class="card"><div class="num">15 min</div><div class="lbl">crear una ruta<br>de aprendizaje<br><b>Tecmilenio</b></div></div>
+      <div class="card"><div class="num">+100</div><div class="lbl">cursos a medida<br>en 3 idiomas<br><b>Rotoplas</b></div></div>
+      <div class="card"><div class="num">1</div><div class="lbl">universidad<br>corporativa<br><b>Execon</b></div></div>
+    </div>
+    <div class="slide-num">09 / 20</div>
+  </section>
+
+
+  <!-- ════ 10 TÍTULO + TEXTO + MOCKUP ════ -->
+  <section class="bg-light s10" data-screen-label="10 Texto + mockup">
+    <img class="logo-br" src="../assets/logo/lapzo-logo.png" alt="lapzo">
+    <div class="pill">
+      <div class="ico"><svg viewBox="0 0 42 37" fill="#A685FF"><rect x="0" y="16" width="32" height="5" rx="1"/><path d="M 20.5 0 L 41 18.5 L 20.5 37 L 17 33.5 L 33 18.5 L 17 3.5 Z"/></svg></div>
+      <div class="label">Lorem ipsum</div>
+    </div>
+
+    <div class="body">
+      <p class="body-lg">Lorem ipsum dolor sit amet consectetur. Tincidunt elit pretium ipsum turpis amet hac. Arcu egestas diam massa ultrices commodo. A pulvinar eu pulvinar eu id nascetur. Auctor ac lectus pretium iaculis dis.</p>
+      <p class="body-lg" style="margin-top: 24px;">Non urna auctor aliquet vitae viverra at etiam. Congue proin feugiat habitant tincidunt facilisi aliquet enim facilisi justo. Risus viverra vulputate eu nunc pellentesque nulla in laoreet.</p>
+    </div>
+
+    <div class="mockup-frame">
+      <div class="mockup-inner">
+        <img src="../assets/ui-shots/team-table.png" alt="" style="width:90%; border-radius:14px;">
+      </div>
+    </div>
+    <div class="slide-num">10 / 20</div>
+  </section>
+
+
+  <!-- ════ 11 SLIDE CON BULLETS ════ -->
+  <section class="bg-light s11" data-screen-label="11 Bullets">
+    <img class="logo-tr" src="../assets/logo/lapzo-logo.png" alt="lapzo">
+    <div class="pill">
+      <div class="ico"><svg viewBox="0 0 42 37" fill="#A685FF"><rect x="0" y="16" width="32" height="5" rx="1"/><path d="M 20.5 0 L 41 18.5 L 20.5 37 L 17 33.5 L 33 18.5 L 17 3.5 Z"/></svg></div>
+      <div class="label">Slide con bullets</div>
+    </div>
+
+    <div class="bullets">
+      <div class="bullet"><div class="n">1</div><div class="card"><div class="h">Lorem ipsum dolor</div><div class="d">Sit amet consectetur. Tincidunt elit pretium ipsum turpis amet hac arcu.</div></div></div>
+      <div class="bullet"><div class="n">2</div><div class="card"><div class="h">Consectetur adipiscing</div><div class="d">Sit amet consectetur. Tincidunt elit pretium ipsum turpis amet hac arcu.</div></div></div>
+      <div class="bullet"><div class="n">3</div><div class="card"><div class="h">Tincidunt elit pretium</div><div class="d">Sit amet consectetur. Tincidunt elit pretium ipsum turpis amet hac arcu.</div></div></div>
+      <div class="bullet"><div class="n">4</div><div class="card"><div class="h">Ipsum turpis amet</div><div class="d">Sit amet consectetur. Tincidunt elit pretium ipsum turpis amet hac arcu.</div></div></div>
+      <div class="bullet"><div class="n">5</div><div class="card"><div class="h">Hac arcu egestas</div><div class="d">Sit amet consectetur. Tincidunt elit pretium ipsum turpis amet hac arcu.</div></div></div>
+    </div>
+    <div class="slide-num">11 / 20</div>
+  </section>
+
+
+  <!-- ════ 12 SLIDE CON CAJAS ════ -->
+  <section class="bg-light s12" data-screen-label="12 Cajas">
+    <img class="logo-tr" src="../assets/logo/lapzo-logo.png" alt="lapzo">
+    <div class="pill">
+      <div class="ico"><svg viewBox="0 0 42 37" fill="#A685FF"><rect x="0" y="16" width="32" height="5" rx="1"/><path d="M 20.5 0 L 41 18.5 L 20.5 37 L 17 33.5 L 33 18.5 L 17 3.5 Z"/></svg></div>
+      <div class="label">Slide con cajas</div>
+    </div>
+
+    <div class="grid">
+      <div class="box"><div class="n">1</div><div class="h">Lorem ipsum dolor sit</div><div class="d">Sit amet consectetur. Tincidunt elit pretium ipsum turpis amet hac arcu egestas.</div></div>
+      <div class="box"><div class="n">2</div><div class="h">Consectetur adipiscing</div><div class="d">Sit amet consectetur. Tincidunt elit pretium ipsum turpis amet hac arcu egestas.</div></div>
+      <div class="box"><div class="n">3</div><div class="h">Tincidunt elit pretium</div><div class="d">Sit amet consectetur. Tincidunt elit pretium ipsum turpis amet hac arcu egestas.</div></div>
+      <div class="box"><div class="n">4</div><div class="h">Ipsum turpis amet hac</div><div class="d">Sit amet consectetur. Tincidunt elit pretium ipsum turpis amet hac arcu egestas.</div></div>
+    </div>
+    <div class="slide-num">12 / 20</div>
+  </section>
+
+
+  <!-- ════ 13 SLIDE CON FLUJOS ════ -->
+  <section class="bg-light s13" data-screen-label="13 Flujos">
+    <img class="logo-tr" src="../assets/logo/lapzo-logo.png" alt="lapzo">
+    <div class="pill">
+      <div class="ico"><svg viewBox="0 0 42 37" fill="#A685FF"><rect x="0" y="16" width="32" height="5" rx="1"/><path d="M 20.5 0 L 41 18.5 L 20.5 37 L 17 33.5 L 33 18.5 L 17 3.5 Z"/></svg></div>
+      <div class="label">Slide con flujos</div>
+    </div>
+
+    <p class="lede">Un flujo de 4 pasos para mostrar un proceso de principio a fin.</p>
+
+    <div class="flow">
+      <div class="step"><div class="n">1</div><div class="h">Detectar</div><div class="d">Lorem ipsum dolor sit amet</div></div>
+      <div class="arr">→</div>
+      <div class="step"><div class="n">2</div><div class="h">Diagnosticar</div><div class="d">Lorem ipsum dolor sit amet</div></div>
+      <div class="arr">→</div>
+      <div class="step"><div class="n">3</div><div class="h">Implementar</div><div class="d">Lorem ipsum dolor sit amet</div></div>
+      <div class="arr">→</div>
+      <div class="step"><div class="n">4</div><div class="h">Medir</div><div class="d">Lorem ipsum dolor sit amet</div></div>
+    </div>
+    <div class="slide-num">13 / 20</div>
+  </section>
+
+
+  <!-- ════ 14 SLIDE CON IMAGEN ════ -->
+  <section class="bg-light s14" data-screen-label="14 Imagen">
+    <img class="logo-br" src="../assets/logo/lapzo-logo.png" alt="lapzo">
+    <div class="pill">
+      <div class="ico"><svg viewBox="0 0 42 37" fill="#A685FF"><rect x="0" y="16" width="32" height="5" rx="1"/><path d="M 20.5 0 L 41 18.5 L 20.5 37 L 17 33.5 L 33 18.5 L 17 3.5 Z"/></svg></div>
+      <div class="label">Slide con imagen</div>
+    </div>
+
+    <div class="body">
+      <p class="body-lg">Lorem ipsum dolor sit amet consectetur. Tincidunt elit pretium ipsum turpis amet hac. Arcu egestas diam massa ultrices commodo.</p>
+      <p class="body-lg" style="margin-top: 28px;">A pulvinar eu pulvinar eu id nascetur. Auctor <em>ac lectus pretium</em> iaculis dis. Non urna auctor aliquet vitae viverra at etiam.</p>
+    </div>
+
+    <div class="image">
+      <img class="lapzi" src="../assets/lapzi/lapzi-party.png" alt="">
+    </div>
+    <div class="slide-num">14 / 20</div>
+  </section>
+
+
+  <!-- ════ 15 CATEGORÍA + BULLETS ════ -->
+  <section class="bg-light s15" data-screen-label="15 Categoría + bullets">
+    <img class="logo-tr" src="../assets/logo/lapzo-logo.png" alt="lapzo">
+
+    <div class="cat">
+      <h2>Ipsum Lorem</h2>
+      <div class="sub">Lorem ipsum dolor sit amet consectetur. Tincidunt elit pretium ipsum turpis amet hac.</div>
+    </div>
+
+    <div class="list">
+      <div class="row"><div class="n">1.</div><div class="t">Lorem ipsum dolor sit amet consectetur. Tincidunt elit pretium ipsum turpis amet hac.</div></div>
+      <div class="row"><div class="n">2.</div><div class="t">Lorem ipsum dolor sit amet consectetur. Tincidunt elit pretium ipsum turpis amet hac.</div></div>
+      <div class="row"><div class="n">3.</div><div class="t">Lorem ipsum dolor sit amet consectetur. Tincidunt elit pretium ipsum turpis amet hac.</div></div>
+      <div class="row"><div class="n">4.</div><div class="t">Lorem ipsum dolor sit amet consectetur. Tincidunt elit pretium ipsum turpis amet hac.</div></div>
+      <div class="row"><div class="n">5.</div><div class="t">Lorem ipsum dolor sit amet consectetur. Tincidunt elit pretium ipsum turpis amet hac.</div></div>
+    </div>
+    <div class="slide-num">15 / 20</div>
+  </section>
+
+
+  <!-- ════ 16 CATEGORÍA + COPY ════ -->
+  <section class="bg-light s16" data-screen-label="16 Categoría + copy">
+    <img class="logo-tr" src="../assets/logo/lapzo-logo.png" alt="lapzo">
+
+    <div class="cat">
+      <h2>Ipsum Lorem</h2>
+    </div>
+
+    <div class="body">
+      <div class="col">
+        <p>Lorem ipsum dolor sit amet consectetur. Tincidunt elit pretium ipsum turpis amet hac. Arcu egestas diam massa <em>ultrices commodo</em>.</p>
+        <p>A pulvinar eu pulvinar eu id nascetur. Auctor ac lectus pretium iaculis dis. Non urna auctor aliquet vitae viverra at etiam.</p>
+      </div>
+      <div class="col">
+        <p>Congue proin feugiat habitant tincidunt facilisi aliquet enim facilisi justo. Risus viverra vulputate eu nunc pellentesque nulla in laoreet.</p>
+        <p>Lorem ipsum dolor sit amet consectetur. Tincidunt elit pretium ipsum turpis amet <em>hac arcu egestas</em> diam massa ultrices commodo.</p>
+      </div>
+    </div>
+    <div class="slide-num">16 / 20</div>
+  </section>
+
+
+  <!-- ════ 17 TABLA COMPARATIVA ════ -->
+  <section class="bg-light s17" data-screen-label="17 Tabla comparativa">
+    <img class="logo-tr" src="../assets/logo/lapzo-logo.png" alt="lapzo">
+    <div class="pill">
+      <div class="ico"><svg viewBox="0 0 42 37" fill="#A685FF"><rect x="0" y="16" width="32" height="5" rx="1"/><path d="M 20.5 0 L 41 18.5 L 20.5 37 L 17 33.5 L 33 18.5 L 17 3.5 Z"/></svg></div>
+      <div class="label">Lorem ipsum</div>
+    </div>
+
+    <div class="table">
+      <div class="row">
+        <div class="cell head"><span class="n">1</span>Opción A</div>
+        <div class="cell head"><span class="n">2</span>Opción B</div>
+        <div class="cell head"><span class="n">3</span>Opción C</div>
+      </div>
+      <div class="row">
+        <div class="cell">Lorem ipsum dolor sit amet consectetur. Mus porttitor at sed arcu.</div>
+        <div class="cell">Lorem ipsum dolor sit amet consectetur. Mus porttitor at sed arcu.</div>
+        <div class="cell">Lorem ipsum dolor sit amet consectetur. Mus porttitor at sed arcu.</div>
+      </div>
+      <div class="row">
+        <div class="cell">Lorem ipsum dolor sit amet consectetur. Mus porttitor at sed arcu nunc.</div>
+        <div class="cell">Lorem ipsum dolor sit amet consectetur. Mus porttitor at sed arcu nunc.</div>
+        <div class="cell">Lorem ipsum dolor sit amet consectetur. Mus porttitor at sed arcu nunc.</div>
+      </div>
+      <div class="row">
+        <div class="cell">Lorem ipsum dolor sit amet consectetur. Mus porttitor.</div>
+        <div class="cell">Lorem ipsum dolor sit amet consectetur. Mus porttitor.</div>
+        <div class="cell">Lorem ipsum dolor sit amet consectetur. Mus porttitor.</div>
+      </div>
+    </div>
+    <div class="slide-num">17 / 20</div>
+  </section>
+
+
+  <!-- ════ 18 TABLA DOBLE ENTRADA ════ -->
+  <section class="bg-light s18" data-screen-label="18 Doble entrada">
+    <img class="logo-tr" src="../assets/logo/lapzo-logo.png" alt="lapzo">
+
+    <div class="title"><h2>Ipsum Lorem</h2></div>
+
+    <div class="matrix">
+      <div></div>
+      <div class="cell label-col">Opción 1</div>
+      <div class="cell label-col">Opción 2</div>
+      <div class="cell label-col">Opción 3</div>
+
+      <div class="cell label-row">Eje A</div>
+      <div class="cell">Lorem ipsum dolor sit amet consectetur. Mus porttitor at sed arcu nunc.</div>
+      <div class="cell">Lorem ipsum dolor sit amet consectetur. Mus porttitor at sed arcu nunc.</div>
+      <div class="cell">Lorem ipsum dolor sit amet consectetur. Mus porttitor at sed arcu nunc.</div>
+
+      <div class="cell label-row">Eje B</div>
+      <div class="cell">Lorem ipsum dolor sit amet consectetur. Mus porttitor at sed arcu nunc.</div>
+      <div class="cell">Lorem ipsum dolor sit amet consectetur. Mus porttitor at sed arcu nunc.</div>
+      <div class="cell">Lorem ipsum dolor sit amet consectetur. Mus porttitor at sed arcu nunc.</div>
+
+      <div class="cell label-row">Eje C</div>
+      <div class="cell">Lorem ipsum dolor sit amet consectetur. Mus porttitor at sed arcu nunc.</div>
+      <div class="cell">Lorem ipsum dolor sit amet consectetur. Mus porttitor at sed arcu nunc.</div>
+      <div class="cell">Lorem ipsum dolor sit amet consectetur. Mus porttitor at sed arcu nunc.</div>
+    </div>
+    <div class="slide-num">18 / 20</div>
+  </section>
+
+
+  <!-- ════ 19 OPCIONES EN CAJAS ════ -->
+  <section class="bg-light s19" data-screen-label="19 Opciones en cajas">
+    <img class="logo-tr" src="../assets/logo/lapzo-logo.png" alt="lapzo">
+    <div class="pill">
+      <div class="ico"><svg viewBox="0 0 42 37" fill="#A685FF"><rect x="0" y="16" width="32" height="5" rx="1"/><path d="M 20.5 0 L 41 18.5 L 20.5 37 L 17 33.5 L 33 18.5 L 17 3.5 Z"/></svg></div>
+      <div class="label">Opciones en cajas</div>
+    </div>
+
+    <div class="lavanda-band"></div>
+
+    <div class="options">
+      <div class="opt"><div class="n">1</div><div class="h">Lorem ipsum dolor sit amet</div><div class="d">Sit amet consectetur. Mus porttitor at sed arcu nunc faucibus dui quam. Condimentum consectetur ullamcorper consectetur lectus sit vitae.</div></div>
+      <div class="opt"><div class="n">2</div><div class="h">Consectetur adipiscing elit</div><div class="d">Sit amet consectetur. Mus porttitor at sed arcu nunc faucibus dui quam. Condimentum consectetur ullamcorper consectetur lectus sit vitae.</div></div>
+      <div class="opt"><div class="n">3</div><div class="h">Tincidunt elit pretium</div><div class="d">Sit amet consectetur. Mus porttitor at sed arcu nunc faucibus dui quam. Condimentum consectetur ullamcorper consectetur lectus sit vitae.</div></div>
+    </div>
+    <div class="slide-num">19 / 20</div>
+  </section>
+
+
+  <!-- ════ 20 QUOTE ════ -->
+  <section class="bg-dark s20" data-screen-label="20 Cita">
+    <img class="logo-tr" src="../assets/logo/lapzo-logo-on-dark.png" alt="lapzo">
+
+    <div class="quote-mark">"</div>
+    <p class="quote">Lapzo nos ayudó a transformar el área de RH en una <em>unidad estratégica</em> que demuestra impacto al CEO trimestre a trimestre.</p>
+
+    <div class="attribution">
+      <div class="who">Pedro González</div>
+      <div class="div"></div>
+      <div class="role">Director de RH · Empresa Tier 1 · 2025</div>
+    </div>
+    <div class="slide-num">20 / 20</div>
+  </section>
+
+</deck-stage>
+
+</body>
+</html>

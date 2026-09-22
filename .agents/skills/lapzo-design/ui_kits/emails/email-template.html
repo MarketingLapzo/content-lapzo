@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Email — Template genérico Lapzo</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  /* === Lapzo email template (generic) ===
+     Width: 670px max — email-safe.
+     Sections are optional: hero + body + (testimonial) + (product card) + footer.
+     Replace {{placeholders}} with real content.
+     For production: convert to table-based HTML + inline styles (use MJML). */
+  body { margin: 0; background: #E5E5EA; font-family: var(--font-body); }
+  .email-wrap { max-width: 670px; margin: 30px auto; background: #fff; box-shadow: 0 8px 28px rgba(20,20,42,.10); overflow: hidden; }
+  .logo-bar { padding: 24px 0; text-align: center; background: #fff; }
+  .logo-bar img { height: 28px; }
+
+  /* HERO */
+  .hero {
+    background: #8B55FE;
+    color: #fff;
+    padding: 32px 32px 36px;
+    position: relative;
+    overflow: hidden;
+    min-height: 260px;
+  }
+  .hero h1 {
+    font-family: 'Degular', 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 1.15;
+    color: #fff;
+    margin: 0 0 16px;
+    letter-spacing: -0.015em;
+    max-width: 70%;
+  }
+  .hero h1 .pill {
+    background: #14142A;
+    color: #fff;
+    padding: 0 14px;
+    border-radius: 9999px;
+    white-space: nowrap;
+    display: inline-block;
+    line-height: 1.25;
+  }
+  .hero .sub { font-size: 14px; color: #fff; margin: 0 0 22px; line-height: 1.45; max-width: 60%; }
+  .hero .cta-white { display: inline-flex; gap: 8px; background: #fff; color: #5029A3; font-weight: 600; font-size: 14px; padding: 11px 22px; border-radius: 9999px; text-decoration: none; box-shadow: 3px 3px 0 #14142A; }
+
+  /* BODY */
+  .body-section { padding: 36px; color: #14142A; font-size: 14px; line-height: 1.55; }
+  .body-section p { margin: 0 0 14px; }
+  .body-section ul { list-style: none; padding: 0; margin: 8px 0 24px; }
+  .body-section ul li { padding: 4px 0 4px 22px; position: relative; line-height: 1.55; }
+  .body-section ul li::before { content: ''; position: absolute; left: 0; top: 9px; width: 8px; height: 8px; background: #14142A; }
+  .body-section .cta-center { text-align: center; margin-top: 24px; }
+  .btn-violet { display: inline-block; background: #8B55FE; color: #fff; font-weight: 600; font-size: 14px; padding: 12px 26px; border-radius: 9999px; text-decoration: none; }
+
+  /* TESTIMONIAL */
+  .testimonial { background: #5029A3; color: #fff; padding: 28px 32px; display: grid; grid-template-columns: 80px 1fr; gap: 22px; align-items: center; }
+  .testimonial .ava { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #C5A9FF, #8B55FE); }
+  .testimonial .text { font-size: 13.5px; line-height: 1.5; font-style: italic; }
+  .testimonial .text .attrib { margin-top: 10px; font-style: normal; font-size: 12.5px; }
+  .testimonial .text .attrib .nm { font-weight: 700; }
+  .testimonial .text .attrib .ro { color: rgba(255,255,255,.7); font-style: italic; }
+
+  /* PRODUCT CARD */
+  .product-card { padding: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center; border-top: 1px solid #EFF0F6; }
+  .module-pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 6px; border-radius: 9999px; background: #FDE0C3; color: #14142A; font-weight: 700; font-size: 13px; margin-bottom: 18px; }
+  .module-pill .ic { width: 24px; height: 24px; border-radius: 50%; background: #F9912A; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 700; }
+  .product-card h2 { font-family: 'Degular', 'Poppins', sans-serif; font-weight: 800; font-size: 26px; line-height: 1.1; color: #14142A; letter-spacing: -0.015em; margin: 0 0 14px; }
+  .product-card .desc { font-size: 13px; line-height: 1.5; color: #14142A; margin: 0 0 22px; }
+  .product-card .visual { aspect-ratio: 1.3; border-radius: 14px; background: linear-gradient(135deg, #ECE8FF, #C5A9FF); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.85); font-size: 11px; font-style: italic; }
+
+  /* FOOTER */
+  .footer { background: #ECE8FF; text-align: center; padding: 30px 24px; color: #14142A; font-size: 12px; }
+  .footer .social { display: flex; gap: 14px; justify-content: center; margin: 14px 0 18px; }
+  .footer .social a { width: 38px; height: 38px; border-radius: 50%; background: #14142A; display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; font-weight: 700; font-size: 13px; }
+  .footer .addr { font-size: 11.5px; line-height: 1.5; margin: 0 0 12px; }
+  .footer .legal a { color: #14142A; font-size: 11.5px; text-decoration: underline; margin: 0 6px; }
+</style>
+</head>
+<body>
+
+<div class="email-wrap">
+
+  <!-- LOGO -->
+  <div class="logo-bar">
+    <img src="../../assets/logo/lapzo-logo.png" alt="lapzo">
+  </div>
+
+  <!-- HERO — adapt for case studies or campaigns -->
+  <div class="hero">
+    <h1>{{HOOK}} <span class="pill">{{KEY_PHRASE}}</span> {{COMPLETION}}.</h1>
+    <p class="sub">{{SUB_TEXT}} <strong>{{CLIENT_NAME}}</strong> {{ACTION_TEXT}}.</p>
+    <a class="cta-white" href="#">{{HERO_CTA_TEXT}}</a>
+  </div>
+
+  <!-- BODY -->
+  <div class="body-section">
+    <p>{{firstname}}, {{INTRO_PARAGRAPH}}.</p>
+    <p>{{BULLETS_INTRO}}:</p>
+    <ul>
+      <li>{{BULLET_1}}</li>
+      <li>{{BULLET_2}}</li>
+      <li>{{BULLET_3}}</li>
+      <li>{{BULLET_4}}</li>
+    </ul>
+    <div class="cta-center">
+      <a class="btn-violet" href="#">{{BODY_CTA_TEXT}}</a>
+    </div>
+  </div>
+
+  <!-- TESTIMONIAL (optional — remove if no quote) -->
+  <div class="testimonial">
+    <div class="ava"></div>
+    <div class="text">
+      "{{TESTIMONIAL_QUOTE}}"
+      <div class="attrib">
+        <span class="nm">{{TESTIMONIAL_NAME}}</span><br>
+        <span class="ro">{{TESTIMONIAL_ROLE}}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT CARD (optional — remove if email is just case study) -->
+  <div class="product-card">
+    <div>
+      <div class="module-pill">
+        <span class="ic">★</span>
+        {{MODULE_NAME}}
+      </div>
+      <h2>{{PRODUCT_TITLE}}</h2>
+      <p class="desc">{{PRODUCT_DESCRIPTION}}</p>
+      <a class="btn-violet" href="#">{{PRODUCT_CTA}}</a>
+    </div>
+    <div class="visual">[ visual ]</div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p style="margin: 0;">¡Síguenos en redes sociales!</p>
+    <div class="social">
+      <a href="#">f</a><a href="#">in</a><a href="#">ig</a>
+    </div>
+    <p class="addr">Lapzo, Torre Vertice, Av. Cto. Frida Kahlo 195,<br>Haciendas de La Sierra, Monterrey, Nuevo León 66269</p>
+    <div class="legal">
+      <a href="#">Darme de baja</a>
+      <a href="#">Gestionar preferencias</a>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

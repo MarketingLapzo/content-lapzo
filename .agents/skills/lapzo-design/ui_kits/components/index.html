@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lapzo · Galería de componentes</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css">
+<style>
+  body { margin: 0; padding: 48px 32px; background: var(--lapzo-bg-page); }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  .sec { margin: 0 0 48px; }
+  .sec > h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 4px; }
+  .sec > p.small { margin: 0 0 18px; }
+  .row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 16px; }
+
+  /* stat card */
+  .stat { background: var(--bg-elev); border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); padding: var(--space-6); }
+  .stat__num { font-family: var(--font-display); font-weight: 700; font-size: 48px; line-height: 1; color: var(--accent); letter-spacing: -.02em; }
+  .stat__num.teal { color: var(--lapzo-teal); }
+  .stat__label { margin-top: 8px; color: var(--fg-muted); font-size: var(--text-small); }
+
+  /* module icon */
+  .modicon { width: 56px; height: 56px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 26px; }
+
+  /* IA box */
+  .ia { background: var(--gradient-ia); border: 1px solid var(--lapzo-violet-pastel-2); border-radius: var(--radius-2xl); padding: var(--space-6); }
+  .ia__tag { display: inline-flex; align-items: center; gap: 6px; font-size: var(--text-caption); font-weight: 600; color: var(--lapzo-violet-dark); background: rgba(255,255,255,.6); padding: 4px 12px; border-radius: var(--radius-pill); }
+
+  /* testimonial */
+  .quote { background: var(--bg-elev); border-radius: var(--radius-lg); box-shadow: var(--shadow-hard); border: 1.5px solid var(--lapzo-bg-dark); padding: var(--space-6); }
+  .quote p { font-style: italic; font-size: var(--text-h4); color: var(--accent-deep); margin: 0 0 16px; }
+  .quote .who { display: flex; align-items: center; gap: 12px; }
+  .avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--lapzo-violet-pastel-2); color: var(--lapzo-violet-dark); display: flex; align-items: center; justify-content: center; font-weight: 600; }
+
+  /* CTA block */
+  .cta { background: var(--gradient-brand); border-radius: var(--radius-2xl); padding: var(--space-12); text-align: center; }
+  .cta h2 { color: #fff; margin: 0 0 8px; }
+  .cta p { color: rgba(255,255,255,.85); margin: 0 0 24px; }
+
+  .swatch { width: 100%; height: 56px; border-radius: var(--radius-sm); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font-size: var(--text-caption); padding: 4px 10px; border-radius: var(--radius-pill); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <span class="eyebrow">Lapzo Design System</span>
+  <h1 class="h1" style="margin:4px 0 8px;">Galería de componentes</h1>
+  <p class="body" style="max-width:640px;margin:0 0 48px;">Bloques reutilizables con la marca aplicada. Importan <code>colors_and_type.css</code>. Copia el patrón y reemplaza el contenido. Para piezas completas ve a <code>ui_kits/</code>.</p>
+
+  <div class="sec">
+    <h3 class="h3"><i class="ti ti-click" style="color:var(--accent)"></i> Botones</h3>
+    <p class="small">Siempre pill. Verbo primero, sin "click aquí".</p>
+    <div class="row">
+      <button class="btn btn-primary">Agenda demo <i class="ti ti-arrow-right"></i></button>
+      <button class="btn btn-ghost">Conoce más</button>
+      <button class="btn btn-dark">Ver caso</button>
+      <button class="btn btn-primary btn-sm">Acción sm</button>
+      <button class="btn btn-primary btn-lg">Agendar demo lg</button>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3 class="h3"><i class="ti ti-tag" style="color:var(--accent)"></i> Badges &amp; pills de módulo</h3>
+    <p class="small">Color del módulo solo como acento.</p>
+    <div class="chips">
+      <span class="chip" style="background:#FDE0C3;color:#F9912A;">CyA</span>
+      <span class="chip" style="background:#DDD4FF;color:#5029A3;">DxC</span>
+      <span class="chip" style="background:#CCFFEC;color:#04949D;">EVA</span>
+      <span class="chip" style="background:#FFD3E3;color:#F3538E;">S&amp;E</span>
+      <span class="chip" style="background:#D6E6FB;color:#2F80ED;">CAT</span>
+      <span class="chip" style="background:var(--lapzo-green-light);color:#0F4C52;"><i class="ti ti-circle-check" style="vertical-align:-1px"></i> Activo</span>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3 class="h3"><i class="ti ti-stack-2" style="color:var(--accent)"></i> Iconos de módulo (two-tone)</h3>
+    <p class="small">Círculo/cuadro pastel + borde y glifo saturados.</p>
+    <div class="row">
+      <div class="modicon" style="background:#FDE0C3;border:1.5px solid #F9912A;color:#F9912A;"><i class="ti ti-book-2"></i></div>
+      <div class="modicon" style="background:#DDD4FF;border:1.5px solid #8B55FE;color:#5029A3;"><i class="ti ti-stairs-up"></i></div>
+      <div class="modicon" style="background:#CCFFEC;border:1.5px solid #04949D;color:#04949D;"><i class="ti ti-chart-radar"></i></div>
+      <div class="modicon" style="background:#FFD3E3;border:1.5px solid #F3538E;color:#F3538E;"><i class="ti ti-target-arrow"></i></div>
+      <div class="modicon" style="background:#D6E6FB;border:1.5px solid #2F80ED;color:#2F80ED;"><i class="ti ti-layout-grid"></i></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3 class="h3"><i class="ti ti-number-9-small" style="color:var(--accent)"></i> Stat cards</h3>
+    <p class="small">Dato grande en font display. Ideal para hero/ads de caso de éxito.</p>
+    <div class="grid3">
+      <div class="stat"><div class="stat__num">+63 mil</div><div class="stat__label">cursos terminados en un año · Mazda</div></div>
+      <div class="stat"><div class="stat__num teal">197</div><div class="stat__label">empresas usan Capacitación y Aprendizaje</div></div>
+      <div class="stat"><div class="stat__num">15 min</div><div class="stat__label">para crear una ruta de aprendizaje · Tecmilenio</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3 class="h3"><i class="ti ti-sparkles" style="color:var(--accent)"></i> Caja Lapzo.IA</h3>
+    <p class="small">Único lugar donde se usan los destellos ✦ y el blur/gradiente IA.</p>
+    <div class="ia">
+      <span class="ia__tag"><i class="ti ti-sparkles"></i> lapzo.IA</span>
+      <p class="body" style="margin:12px 0 0;color:var(--accent-deep);">Crea un curso completo desde un PDF en 5 minutos. <em>Lapzo.IA</em> arma módulos, evaluaciones y ruta sugerida. <span style="color:var(--accent)">✦</span></p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3 class="h3"><i class="ti ti-quote" style="color:var(--accent)"></i> Testimonial (sombra dura)</h3>
+    <p class="small">Cita en itálica, autor con avatar de iniciales.</p>
+    <div class="quote" style="max-width:520px;">
+      <p>"Transformamos la capacitación de toda la planta sin frenar la operación."</p>
+      <div class="who"><div class="avatar">RM</div><div><strong>Recursos Humanos</strong><div class="small">Mazda México</div></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3 class="h3"><i class="ti ti-flag-3" style="color:var(--accent)"></i> Bloque CTA</h3>
+    <p class="small">Gradiente de marca, título en blanco, sin signo de exclamación.</p>
+    <div class="cta">
+      <h2>Lleva el talento de tu equipo al siguiente nivel</h2>
+      <p>Agenda una demo y conoce el caso de tu industria.</p>
+      <button class="btn" style="background:#fff;color:var(--accent);">Agenda demo <i class="ti ti-arrow-right"></i></button>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3 class="h3"><i class="ti ti-building-store" style="color:var(--accent)"></i> Clientes por módulo</h3>
+    <p class="small">Componente completo en <a href="clientes-por-modulo.html">clientes-por-modulo.html</a>.</p>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css"><style>
+body{margin:0;padding:24px;background:#fff;font-family:var(--font-body);color:#3F3F46}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.label{font-size:10px;color:#71717A;font-family:ui-monospace,monospace;text-transform:uppercase;letter-spacing:.05em;width:72px;align-self:center}
+.b{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:9999px;font-size:12px;font-weight:600;line-height:1.4}
+.b .dot{width:6px;height:6px;border-radius:50%}
+/* status */
+.b.success{background:#CCFFEC;color:#012D33}
+.b.success .dot{background:#01DA8C}
+.b.warning{background:#FFF3CC;color:#3F3F46}
+.b.warning .dot{background:#F2C94C}
+.b.danger{background:#FFD3E3;color:#5A1838}
+.b.danger .dot{background:#F3538E}
+.b.info{background:#D6E6FB;color:#0a2e6b}
+.b.info .dot{background:#2F80ED}
+.b.neutral{background:#F7F7FC;color:#3F3F46}
+.b.neutral .dot{background:#94A3B8}
+/* module pills */
+.mod{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.mod.cya{background:#FDE0C3;color:#3F3F46}
+.mod.dxc{background:#ECE8FF;color:#5029A3}
+.mod.eva{background:#CCFFEC;color:#012D33}
+.mod.se{background:#FFD3E3;color:#5A1838}
+.mod.cat{background:#D6E6FB;color:#0a2e6b}
+.mod.taas{background:#DDD4FF;color:#5029A3}
+</style></head><body>
+<div class="row"><span class="label">status</span>
+  <span class="b success"><span class="dot"></span>Aprobado</span>
+  <span class="b warning"><span class="dot"></span>En progreso</span>
+  <span class="b danger"><span class="dot"></span>Atrasado</span>
+  <span class="b info"><span class="dot"></span>En revisión</span>
+  <span class="b neutral"><span class="dot"></span>Sin comenzar</span>
+</div>
+<div class="row"><span class="label">módulo</span>
+  <span class="mod cya">CyA</span>
+  <span class="mod dxc">DxC</span>
+  <span class="mod eva">EVA</span>
+  <span class="mod se">S&E</span>
+  <span class="mod cat">CAT</span>
+  <span class="mod taas">TaaS</span>
+</div>
+</body></html>
